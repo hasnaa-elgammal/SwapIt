@@ -1,0 +1,135 @@
+.container{
+    margin-top:200px;
+    width: 100%
+}
+
+.profile-card {
+  width: 100%;
+  min-height: 700px;
+  margin: auto;
+ 
+  box-shadow: 0px 8px 60px -10px rgba(13,28,39,0.6);
+  background: #ffffff;
+  border-radius: 12px;
+  max-width: 700px;
+  position: relative;}
+
+  
+.img{
+    width: 150px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    z-index: 4;
+    box-shadow: 0px 5px 5px 0px rgb(77, 4, 4), 0px 0px 0px 7px rgba(221, 144, 144, 0.5);
+}
+
+.img img {
+    width: 100%
+}
+.cnt{
+    margin-top: -35px;
+    text-align: center;
+    padding: 0 20px;
+    padding-bottom: 40px;
+    transition: all .3s;
+}
+
+.name{
+    font-weight: 700;
+    font-size: 24px;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.txt{
+    font-size: 18px;
+    font-weight: 500;
+    color: #343a40;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.icon{
+    color: rgb(248, 247, 246);
+    padding-left: 3px;
+}
+
+.ctr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+    .button {
+        background: none;
+        border: none;
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 700;
+        font-size: 19px;
+        margin: 15px 35px;
+        padding: 15px 40px;
+        min-width: 201px;
+        border-radius: 50px;
+        min-height: 55px;
+        color: #fff;
+        cursor: pointer;
+        backface-visibility: hidden;
+        transition: all .3s;
+    
+        background: linear-gradient(45deg, #721c24, #e09faf);
+        box-shadow: 0px 4px 30px rgba(233, 234, 236, 0.4);
+    
+    }
+    button:hover{
+        box-shadow: 0px 7px 30px rgba(164, 167, 170, 0.75);
+    }
+
+    
+  .rate{
+      color: rgba(164, 167, 170, 0.75);
+      font-weight: bold;
+      font-size: 18px ;
+
+  }
+  .checked {
+    color: rgba(151, 11, 11, 0.952);
+
+  }
+ 
+  
+.card{
+    margin-top: 20px;
+    width: 400px;
+  
+}
+p{
+    text-align: center;
+}
+.card-body{
+    float: right;
+    padding-top: 10px;
+    padding-right: 2px;
+    
+   
+}
+a{
+    color: rgb(41, 40, 40);
+}
+
+.row{
+    margin-left: 130px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#del{
+   margin-left:30px;
+}
+
+.dark-icon{
+    color: #343a40
+}

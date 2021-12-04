@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="profile-card js-profile-card">
+        
+        <div>
+            <label for="formFileLg" class="form-label">Choose your Product Photo</label>
+            <input class="form-control form-control-lg" id="formFileLg" type="file">
+            
+          </div>
+
+          <input class="form-control" type="text" placeholder="Enter Your User Name" aria-label="default input example">
+
+          <input class="form-control" type="text" placeholder="Enter Your Product description" aria-label="default input example">
+
+
+          <div class="dropdown">
+            <a class="btn btn-light dropdown-toggle" (click)="toggleNav()" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+             Chosse your Product Category
+            </a>
+          
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" [class.show]="isOpen">
+              <li><a class="dropdown-item" >Clothes</a></li>
+              <li><a class="dropdown-item" >Books</a></li>
+              <li><a class="dropdown-item" >Something else </a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+
+            <a class="btn btn-light dropdown-toggle" (click)="toggleNav()" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+             Chosse you want Sell or Swap 
+            </a>
+          
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" [class.show]="isOpen">
+              <li><a class="dropdown-item" >buy</a></li>
+              <li><a class="dropdown-item" >Swap</a></li>
+            </ul>
+        </div>
+
+        <input  id="price  " class="form-control" type="text" placeholder="Enter price" aria-label="default input example">
+
+        <button class="button"  routerLink="/profile"> ADD </button>
+
+
+
+          
+
+          
+          
+     </div>
+</div>

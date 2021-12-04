@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-12 col-md-6 col-lg-3" *ngFor="let product of products">
+    <div class="card" >
+        <img [src]="product.photo" class="card-img-top" height="200px">
+        <div class="card-body">
+          <h5 class="card-title">
+              {{product.category}}
+          </h5>
+          <p class="card-text">{{product.desc}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+
+          <li class="list-group-item">
+                  
+            <div >
+              <p class="card-text"><small class="text-muted">BY:</small> {{product.owner}}</p>
+
+             </div>
+         
+        </li>
+        
+        <div>
+
+          <li class="list-group-item">{{product.price  | currency}}
+            <button type="button" class="btn btn-dark">Swap</button>
+            <div class="card-body">
+                <a routerLink="/fav" class="card-link "><fa-icon [icon]="faHeart"></fa-icon></a>
+                <a  class="card-link"><fa-icon [icon]=" faTrash"></fa-icon></a>
+         </div>
+         <div class="card-body"></div>
+        </li>
+            </div>
+          
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+
+         
+        </ul>
+       
+      </div>
+    </div>
+</div>
+
+</div>

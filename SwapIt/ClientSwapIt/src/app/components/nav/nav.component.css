@@ -1,0 +1,66 @@
+.navbar{
+    background-color: white;
+    height: 100px;
+    padding-left: 50px;
+}
+
+.navbar-brand{
+    font: var(--fnt,var(--font_5));
+    transition: var(--trans,color .4s ease 0s);
+    color: var(--corvid-color,rgb(var(--txt,var(--color_15))));
+    white-space: nowrap;
+    font-family: Arial,Helvetica,sans-serif;
+
+    font-weight: bold;
+    font-size: 30px;
+}
+
+p{
+    font-size: 15px;
+}
+.nav-link{
+    font: var(--fnt,var(--font_5));
+    transition: var(--trans,color .4s ease 0s);
+    color: var(--corvid-color,rgb(var(--txt,var(--color_15))));
+    white-space: nowrap;
+    font-family: Arial,Helvetica,sans-serif;
+
+    font-weight: bold;
+    font-size: 20px;
+}
+button{
+    color: rgb(3, 2, 2);
+    margin-right: 2px;
+    float: right;
+}
+
+input{
+    border: none;   
+}
+
+#ul1{
+    margin-left: 200px;
+}
+form{
+    margin-left:200px;
+    border-bottom: solid 2px;
+    
+}
+.two{
+    float: left;
+}
+
+#ul2{
+    margin-left: 30px;
+    flex-direction: row;
+    justify-content: space-around; 
+}
+
+
+.logout, .profile {
+    cursor: pointer;
+}
+
+.navbar-collapse{
+    background-color: #FFFFFF;
+}
