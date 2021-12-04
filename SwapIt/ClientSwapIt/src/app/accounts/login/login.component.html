@@ -1,0 +1,33 @@
+<div class="container">
+    <h2 class="text-center">Log In</h2>
+    <div class="alert alert-danger fade show" role="alert" *ngIf="this.dangerMessage != null && this.dangerMessage != ''">
+        <span>{{this.dangerMessage}}</span>
+    </div>
+    <form class="row g-3"(ngSubmit)="login()" [formGroup]="loginForm">
+        <div class="col-12">
+            <label for="inputEmail4" class="form-label">Email <span class="required-asterisk">*</span></label>
+            <input name="email" formControlName="email" type="email" class="form-control" placeholder="Enter Your Email" required >
+            <div class="alert alert-danger" *ngIf="this.loginForm.get('email').errors?.required && this.loginForm.get('email').touched">Email is required</div>
+        </div> 
+        <div class="col-12">
+            <label for="inputPassword4" class="form-label">Password <span class="required-asterisk">*</span></label>
+            <input name="password" formControlName="password" type="password" class="form-control" placeholder="Enter Your password" required minlength="6" >
+            <div class="alert alert-danger" *ngIf="this.loginForm.get('password').errors?.required && this.loginForm.get('password').touched">Password is required</div>
+        </div>
+        <div class="col-md-12 form-group form-check">
+            <input name="rememberMe" formControlName="rememberMe" type="checkbox" id="rememberMe" class="mr-2">
+            <label for="rememberMe" class="form-check-label"> Remember Me</label>
+        </div>
+
+        <div class= "col-12 text-center">
+           <button class="btn btn-dark" [disabled]="!(this.loginForm.valid)">Log In</button>
+        </div>
+        <div class="col-md-12 text-left mb-3">
+            <a class="link-danger" aria-current="page" routerLink="/resetpassword" routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}">Forgot your password?</a>
+        </div>
+    </form>
+    <div class="alert alert-danger">
+        <span>Don't Have an Account? you can create one from here </span>
+        <a class="link-danger " aria-current="page" routerLink="/signup" routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}">SignUp</a>
+    </div>
+</div>

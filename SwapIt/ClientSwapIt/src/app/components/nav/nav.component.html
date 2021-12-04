@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      SWAP IT
+      <p>SWAP  BUY   SELL</p>
+    </a>
+    <button (click)="toggleNav()" class="navbar-toggler btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span > <fa-icon [icon]="faBars"></fa-icon></span>
+    </button>
+    <div class="collapse navbar-collapse" [class.show]="isOpen" id="navbarSupportedContent">
+      <ul  id="ul1" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page"  routerLink="/admin">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page"  routerLink="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact">Contact</a>
+        </li>
+        
+        
+      </ul>
+      <form class="d-flex">
+          <div class="one">
+          <button class="btn " type="submit">
+              <fa-icon [icon]="faSearch"></fa-icon>
+          </button>
+          </div>
+          <div class="two">
+              <input class="form-control me-2" type="search" placeholder="Search...." aria-label="Search">
+          </div>
+          
+      </form>
+      <ul  id="ul2"class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li>
+          <a class="nav-link profile" aria-current="page" (click)="this.GotoProfile()"><fa-icon [icon]="faUserCircle" *ngIf="isUserIn()"></fa-icon></a>
+        </li>
+        <li>
+          <a class="nav-link" aria-current="page" routerLink="/fav"><fa-icon [icon]="faHeart" *ngIf="isUserIn()"></fa-icon></a>
+        </li>
+        <li>
+          <a class="nav-link" aria-current="page" routerLink="/cart"><fa-icon [icon]="faCartPlus" *ngIf="isUserIn()"></fa-icon></a>
+        </li>
+        <li>
+          <a class="nav-link" aria-current="page" routerLink="/login" *ngIf="!isUserIn()">LogIn</a>
+        </li>
+        <li>
+          <a class="nav-link logout" aria-current="page" (click)="logout()" *ngIf="isUserIn()">LogOut</a>
+        </li>
+      
+      </ul>
+
+      
+    </div>
+  </div>
+</nav>

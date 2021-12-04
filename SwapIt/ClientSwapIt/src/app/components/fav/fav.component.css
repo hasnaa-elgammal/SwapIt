@@ -1,0 +1,19 @@
+.container{
+    margin-top: 25px;
+}
+.card{
+    margin-top: 20px;
+}
+p{
+    text-align: center;
+}
+.card-body{
+    float: right;
+    padding-top: 10px;
+    padding-right: 2px;
+    
+   
+}
+a{
+    color: rgb(41, 40, 40);
+}
