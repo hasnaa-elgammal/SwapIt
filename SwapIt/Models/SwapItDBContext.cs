@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace SwapIt.Models
 {
-    public partial class SwapItDBContext : IdentityDbContext<User, Role, string>
+    public partial class ApplicationDB : IdentityDbContext<User, Role, string>
     {
-        public SwapItDBContext()
+        public ApplicationDB()
         {
         }
 
-        public SwapItDBContext(DbContextOptions<SwapItDBContext> options)
+        public ApplicationDB(DbContextOptions<ApplicationDB> options)
             : base(options)
         {
         }

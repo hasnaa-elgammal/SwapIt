@@ -9,7 +9,7 @@ using SwapIt.Models;
 
 namespace SwapIt.Migrations
 {
-    [DbContext(typeof(SwapItDBContext))]
+    [DbContext(typeof(ApplicationDB))]
     [Migration("20211128131909_editcountry")]
     partial class editcountry
     {

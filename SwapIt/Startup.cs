@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SwapIt.Models;
+using SwapIt.Repository.Admin;
 
 namespace SwapIt
 {
@@ -30,6 +31,7 @@ namespace SwapIt
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IAdminRepository, AdminRepo>();
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = (context => true);
@@ -38,15 +40,15 @@ namespace SwapIt
 
             services.AddControllers();
 
-            services.AddDbContext<SwapItDBContext>(options => 
-            options.UseSqlServer(Configuration.GetConnectionString("Hasnaa")));
+            services.AddDbContext<ApplicationDB>(options => 
+            options.UseSqlServer(Configuration.GetConnectionString("Sara")));
 
             services.AddIdentity<User, Role>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredUniqueChars = 0;
                 options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<SwapItDBContext>();
+            }).AddEntityFrameworkStores<ApplicationDB>();
 
             services.AddAuthentication(options =>
             {

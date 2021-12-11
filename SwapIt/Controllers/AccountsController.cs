@@ -20,13 +20,13 @@ namespace SwapIt.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        private readonly SwapItDBContext _db;
+        private readonly ApplicationDB _db;
         private readonly UserManager<User> _manager;
         private readonly SignInManager<User> _signinmanager;
         private readonly RoleManager<Role> _rolemanager;
 
         public AccountsController(
-            SwapItDBContext db,
+            ApplicationDB db,
             UserManager<User> usermanager,
             SignInManager<User> signinmanager,
             RoleManager<Role> rolemanager)
@@ -107,7 +107,8 @@ namespace SwapIt.Controllers
             {
                 if (await _rolemanager.RoleExistsAsync("User"))
                 {
-                    if (!await _manager.IsInRoleAsync(user, "User")){
+                    if (!await _manager.IsInRoleAsync(user, "User") && !await _manager.IsInRoleAsync(user, "Admin"))
+                    {
                         await _manager.AddToRoleAsync(user, "User");
                     }
 
@@ -236,6 +237,7 @@ namespace SwapIt.Controllers
                     Email = "hasnaaahamed2@gmail.com",
                     FirstName = "admin",
                     LastName = "Admin",
+                    PhoneNumber="010209059884",
                     EmailConfirmed = true
                 };
 
