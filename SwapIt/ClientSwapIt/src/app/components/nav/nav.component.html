@@ -13,7 +13,7 @@
           <a class="nav-link" aria-current="page" routerLink="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page"  routerLink="/admin">Dashboard</a>
+          <a class="nav-link" aria-current="page"  routerLink="/admin" *ngIf="this.IsAdmin()">Dashboard</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " aria-current="page"  routerLink="/about">About</a>
@@ -39,6 +39,9 @@
         <li>
           <a class="nav-link profile" aria-current="page" (click)="this.GotoProfile()"><fa-icon [icon]="faUserCircle" *ngIf="isUserIn()"></fa-icon></a>
         </li>
+        <!-- <li>
+          <a class="nav-link" aria-current="page" routerLink="admin" *ngIf="this.IsAdmin()"><i class="fa fa-user-shield"></i> Admin Panel</a>
+        </li> -->
         <li>
           <a class="nav-link" aria-current="page" routerLink="/fav"><fa-icon [icon]="faHeart" *ngIf="isUserIn()"></fa-icon></a>
         </li>
@@ -57,4 +60,5 @@
       
     </div>
   </div>
+  
 </nav>

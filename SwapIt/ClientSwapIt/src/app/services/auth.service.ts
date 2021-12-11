@@ -34,7 +34,7 @@ export class AuthService {
   public installStorage(remember: boolean, email: string){
     var day = new Date();
     if(remember){
-      day.setDate(day.getDay() + 14);
+      day.setDate(day.getDate() + 14);
     } 
     else {
       day.setMinutes(day.getMinutes() + 30);

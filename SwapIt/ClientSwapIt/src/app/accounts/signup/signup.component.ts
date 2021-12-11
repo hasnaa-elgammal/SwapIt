@@ -45,7 +45,8 @@ export class SignupComponent implements OnInit {
       city: '',
       zipCode: '',
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      phone:''
     });
 
     this.userForm.valueChanges.subscribe(x=>{

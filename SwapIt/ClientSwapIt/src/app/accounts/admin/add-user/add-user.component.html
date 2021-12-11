@@ -1,13 +1,16 @@
 
 <div class="container">
 
-    <h2 class="text-center">Sign Up</h2>
+    <h2 class="text-center mb-4">Add New User</h2>
 
     <div class="alert alert-success fade show" role="alert" *ngIf="this.successMessage != null && this.successMessage != ''">
         <span>{{this.successMessage}}</span>
     </div>
+    <div class="alert alert-danger fade show" role="alert" *ngIf="this.errorMsg != null && this.errorMsg != ''">
+        <span>{{this.errorMsg}}</span>
+    </div>
 
-    <form class="row g-3"(ngSubmit)="singup()" [formGroup]="userForm">
+    <form class="row g-3"(ngSubmit)="AddUser()" [formGroup]="userForm">
 
         <div class="col-md-6">
             <label for="inputName" class="form-label">First Name <span class="required-asterisk">*</span></label>
@@ -23,19 +26,18 @@
 
         <div class="col-md-12">
             <label for="inputEmail4" class="form-label">Email <span class="required-asterisk">*</span></label>
-            <input name="email" formControlName="email" type="email" class="form-control" placeholder="Enter Your Email" required (blur)="isEmailExists()">
+            <input name="email" formControlName="email" type="email" class="form-control" placeholder="Enter Your Email" required>
             <div class="alert alert-danger" *ngIf="this.userForm.get('email').errors?.required && this.userForm.get('email').touched">Email is required</div>
             <div class="alert alert-danger" *ngIf="this.userForm.get('email').errors?.email && this.userForm.get('email').touched">Invalid Email</div>
-            <div class="alert alert-danger" *ngIf="this.existsmessage !='' && this.existsmessage !=null && this.userForm.get('email').value !== null && this.userForm.get('email').value !== ''">{{this.existsmessage}}</div>
+            <div class="alert alert-danger" *ngIf="this.existsmessage !='' && this.existsmessage !=null && this.userForm.get('email').value !== null && this.userForm.get('email').value !== '' && isEmailExists()">{{this.existsmessage}}</div>
         </div> 
-        <div class="col-md-12">
+        <!-- <div class="col-md-12">
             <label for="phone" class="form-label">Phone Number <span class="required-asterisk">*</span></label>
             <input name="email" formControlName="phone" type="number" class="form-control" placeholder="Enter Your phone Number" required>
             <div class="alert alert-danger" *ngIf="this.userForm.get('phone').errors?.required && this.userForm.get('phone').touched">Phone is required</div>
-            <div class="alert alert-danger" *ngIf="this.userForm.get('phone').errors?.email && this.userForm.get('phone').touched">Invalid PhoneNumber</div>
+            <div class="alert alert-danger" *ngIf="this.userForm.get('phone').errors?.email && this.userForm.get('phone').touched">Invalid phone</div>
             <div class="alert alert-danger" *ngIf="this.existsmessage !='' && this.existsmessage !=null && this.userForm.get('phone').value !== null && this.userForm.get('phone').value !== ''">{{this.existsmessage}}</div>
-        </div> 
-
+        </div>  -->
         <div class="col-md-6">
             <label for="inputPassword4" class="form-label">Password <span class="required-asterisk">*</span></label>
             <input name="password" formControlName="password" type="password" class="form-control" placeholder="Enter Your password" required minlength="6" >
@@ -66,9 +68,15 @@
             <label for="inputZip" class="form-label">Zip</label>
             <input type="text" formControlName="zipCode" class="form-control" id="inputZip" placeholder="Zip Code">
         </div>
+        <!-- <div class="form-check mb-3">
+          <label class="form-check-label">
+            <input type="checkbox"formControlName="emailConfirmed" class="form-check-input ml-2" name="emailConfirmed" id="emailConfirmed" value="checkedValue" >
+            <label class="ml-4">Email Activated</label>
+          </label>
+        </div> -->
 
-        <div class= "col-12 text-center">
-           <button class="btn btn-dark" [disabled]="!(this.userForm.valid) || this.passwordsNotMatch() || isEmailExists()">Create Account</button>
+        <div class= "col-12 text-center mt-5">
+           <button class="btn btn-dark" [disabled]="!(this.userForm.valid) || this.passwordsNotMatch() ">Add User</button>
         </div>
 
     </form>

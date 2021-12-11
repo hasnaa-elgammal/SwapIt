@@ -69,5 +69,11 @@ export class NavComponent implements OnInit {
       this.route.navigate(['/profile', this.email]);
     }
   }
+  IsAdmin(){
+    if(this.auth.role == 'Admin'){
+      return true;
+    }
+    return false;
+  }
 
 }

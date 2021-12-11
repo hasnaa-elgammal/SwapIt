@@ -29,6 +29,8 @@ import { AdvertiseComponent } from './components/advertise/advertise.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ResetpasswordComponent } from './accounts/resetpassword/resetpassword.component';
 import { EditprofileComponent } from './accounts/editprofile/editprofile.component';
+import { UsersComponent } from './accounts/admin/users/users.component';
+import { AddUserComponent } from './accounts/admin/add-user/add-user.component';
 
 
 @NgModule({
@@ -55,6 +57,8 @@ import { EditprofileComponent } from './accounts/editprofile/editprofile.compone
     AdvertiseComponent,
     ResetpasswordComponent,
     EditprofileComponent,
+    UsersComponent,
+    AddUserComponent,
     
     
     

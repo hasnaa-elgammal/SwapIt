@@ -1,0 +1,38 @@
+<div class="">
+
+    <div>
+        <table class="table table-response bg-light border">
+            <thead>
+                <tr class="bg-dark text-light">
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>ZipCode</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td scope="row">{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.county}}</td>
+                    <td>{{user.city}}</td>
+                    <td>{{user.zipcode}}</td>
+                    <td>
+                        <div>
+                            <button type="button"(click)="EditUserClick(user.id)" class="btn btn-primary btn-sm">Edit</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

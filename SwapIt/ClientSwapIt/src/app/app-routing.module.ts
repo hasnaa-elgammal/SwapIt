@@ -23,6 +23,7 @@ import { AboutComponent } from './components/about/about.component';
 
 import { NavComponent } from './components/nav/nav.component';
 import { NotFoundComponent } from './components/not-found/not-found.component'; 
+import { AddUserComponent } from './accounts/admin/add-user/add-user.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
   
   {path:'fav' ,component:FavComponent},
   {path:'**' , component:NotFoundComponent},
+  {path:'edituser/:id' ,component:AddUserComponent},
   
 
 
