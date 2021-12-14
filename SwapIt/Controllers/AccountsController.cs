@@ -196,7 +196,85 @@ namespace SwapIt.Controllers
             }
             return null;
         }
-        private bool EmailIsValid(string email)
+
+        [HttpPost]
+        [Route("EditProfile")]
+        public async Task<IActionResult> EditProfile(EditModel model)
+        {
+            var user =await  _manager.FindByEmailAsync(model.Email);
+
+            if (user != null)
+            {
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.County = model.Country;
+                user.City = model.City;
+                user.Zipcode = model.Zipcode;
+                user.PhoneNumber = model.PhoneNumber;
+
+                var result = await _manager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return Ok();
+                }
+            }
+
+            return BadRequest();
+        }
+
+        [HttpGet]
+        [Route("DeleteProfile/{email}")]
+        public async Task<IActionResult> DeleteProfile(string email)
+        {
+            var user = await _manager.FindByEmailAsync(email);
+
+            if (user != null)
+            {
+                var result = await _manager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return Ok();
+                }
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPost]
+        [Route("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model != null)
+                {
+                    var user = await _manager.FindByEmailAsync(model.Email);
+                    
+
+                    if (user != null)
+                    {
+                        var check = await _manager.CheckPasswordAsync(user, model.OldPassword);
+                        if (check)
+                        {
+                            var token = await _manager.GeneratePasswordResetTokenAsync(user);
+                            if (token != null)
+                            {
+                                var reset = await _manager.ResetPasswordAsync(user, token, model.NewPassword);
+                                if (reset.Succeeded)
+                                {
+                                    return Ok();
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            return BadRequest();
+
+        }
+
+            private bool EmailIsValid(string email)
         {
             Regex reg = new Regex(@"\w+\@\w+\.\w|\w +\@\w +\.\w");
             if (reg.IsMatch(email))

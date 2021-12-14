@@ -34,7 +34,7 @@ export class CategryListComponent implements OnInit {
   }
 
   EditCategory(id:number,catName:string){
-    if(id){
+    if(id != null){
       this.router.navigate(['/editcategory',id,catName]);
     }
   }

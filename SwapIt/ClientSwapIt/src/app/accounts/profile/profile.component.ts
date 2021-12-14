@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
+import {faCog, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {faCommentAlt} from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { Product } from 'src/app/categories/interfaces/product.interface';
@@ -18,9 +18,11 @@ import { Users } from 'src/app/models/users.model';
 })
 export class ProfileComponent implements OnInit {
 
+  isOpen:boolean=false;
   email:string;
   user: Users;
   faMapMarkerAlt=faMapMarkerAlt;
+  faCog = faCog;
   faCommentAlt=faCommentAlt;
   faHeart= faHeart;
   faCartPlus=faCartPlus;
@@ -51,6 +53,10 @@ export class ProfileComponent implements OnInit {
     this.GetProfile()
   }
 
+  toggleSettings(){
+    this.isOpen= !this.isOpen
+  }
+
   GetProfile(){
     this.auth.GetProfile(this.email).subscribe(success=> {
       var u = success;
@@ -71,4 +77,6 @@ export class ProfileComponent implements OnInit {
       return this.user.userImage
     }
   }
+
+
 }

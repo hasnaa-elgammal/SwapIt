@@ -41,14 +41,14 @@ namespace SwapIt
             services.AddControllers();
 
             services.AddDbContext<ApplicationDB>(options => 
-            options.UseSqlServer(Configuration.GetConnectionString("Sara")));
+            options.UseSqlServer(Configuration.GetConnectionString("Hasnaa")));
 
             services.AddIdentity<User, Role>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredUniqueChars = 0;
                 options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<ApplicationDB>();
+            }).AddEntityFrameworkStores<ApplicationDB>().AddDefaultTokenProviders();
 
             services.AddAuthentication(options =>
             {

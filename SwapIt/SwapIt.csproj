@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientSwapIt\**" />
+    <Content Remove="ClientSwapIt\**" />
+    <EmbeddedResource Remove="ClientSwapIt\**" />
+    <None Remove="ClientSwapIt\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.12" />
     <PackageReference Include="Microsoft.CodeAnalysis.Compilers" Version="4.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />

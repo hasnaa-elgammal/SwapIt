@@ -27,7 +27,8 @@ namespace SwapIt.Repository.Admin
         {
             var category = new Category
             {
-                CategoryName = model.CategoryName
+                CategoryName = model.CategoryName,
+                CategoryImage = model.CategoryImage
             };
             _db.Categories.Add(category);
             await _db.SaveChangesAsync();
@@ -272,15 +273,10 @@ namespace SwapIt.Repository.Admin
         }
 
         public async Task<IEnumerable<User>> GetUsers()
-            {
-                return await _db.Users.ToListAsync();
-            }
+        {
+            return await _db.Users.ToListAsync();
+        }
 
 
-
-        //Task<IEnumerable<User>> IAdminRepository.GetUsers()
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

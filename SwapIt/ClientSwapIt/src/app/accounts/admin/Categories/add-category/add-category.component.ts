@@ -31,6 +31,7 @@ export class AddCategoryComponent implements OnInit {
     this.category={
       id:0,
       categoryName:'',
+      categoryImage: ''
     }
     this.id=0;
     this.btnTitle='ADD';
