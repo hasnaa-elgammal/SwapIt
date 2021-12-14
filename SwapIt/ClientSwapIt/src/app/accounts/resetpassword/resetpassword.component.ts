@@ -12,6 +12,7 @@ export class ResetpasswordComponent implements OnInit {
 
   userForm!: FormGroup;
   successMessage : string;
+  dangerMessage : string;
   model: ResetModel
 
   constructor(
@@ -21,6 +22,7 @@ export class ResetpasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.successMessage = '';
+    this.dangerMessage = '';
     this.model = {
       email: this.service.email,
       oldPassword: '',
@@ -39,7 +41,9 @@ export class ResetpasswordComponent implements OnInit {
         this.validateModel();
         this.service.ResetPassword(this.model).subscribe(success => {
           this.successMessage = 'Reset Password successfully!';
-        }, err => console.log(err));
+        }, err => {
+          this.dangerMessage = 'Cannot reset password, Please Try Again!';
+        });
     } 
   }
 
