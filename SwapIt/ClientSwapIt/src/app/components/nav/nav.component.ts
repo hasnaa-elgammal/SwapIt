@@ -70,8 +70,11 @@ export class NavComponent implements OnInit {
     }
   }
   IsAdmin(){
-    if(this.auth.role == 'Admin'){
-      return true;
+    var isAdmin=!!this.auth.role;
+    if(isAdmin){
+      if( this.auth.role.toLowerCase() == 'admin'){
+        return true;
+      }
     }
     return false;
   }

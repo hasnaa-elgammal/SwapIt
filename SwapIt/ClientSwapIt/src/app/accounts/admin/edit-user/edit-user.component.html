@@ -1,7 +1,7 @@
 
 <div class="container">
 
-    <h2 class="text-center mb-4">{{title}}</h2>
+    <h2 class="text-center mb-4">Edit User</h2>
 
     <div class="alert alert-success fade show" role="alert" *ngIf="this.message != null && this.message != ''">
         <span>{{this.message}}</span>
@@ -76,7 +76,7 @@
         </div>
 
         <div class= "col-12 text-center mt-5">
-           <button class="btn btn-dark" [disabled]="!(this.userForm.valid) || this.passwordsNotMatch() ">{{btnTitle}}</button>
+           <button class="btn btn-dark" [disabled]="!(this.userForm.valid) || this.passwordsNotMatch() ">Update User</button>
         </div>
 
     </form>

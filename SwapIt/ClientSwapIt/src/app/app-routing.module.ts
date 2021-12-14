@@ -17,13 +17,17 @@ import { AdvertiseComponent } from './components/advertise/advertise.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FavComponent } from './components/fav/fav.component';
 import { AboutComponent } from './components/about/about.component';
-
+import { EditUserComponent } from './accounts/admin/edit-user/edit-user.component';
 
 
 
 import { NavComponent } from './components/nav/nav.component';
 import { NotFoundComponent } from './components/not-found/not-found.component'; 
 import { AddUserComponent } from './accounts/admin/add-user/add-user.component';
+import { AccessdeniedComponent } from './components/accessdenied/accessdenied.component';
+import { AdminGaurdService } from './gaurds/admin-gaurd.service';
+import { EditUserRoleComponent } from './accounts/admin/edit-user-role/edit-user-role.component';
+import { AddCategoryComponent } from './accounts/admin/Categories/add-category/add-category.component';
 
 
 const routes: Routes = [
@@ -34,11 +38,12 @@ const routes: Routes = [
   {path:'profile/:email' , component:ProfileComponent},
   {path:'resetpassword' , component:ResetpasswordComponent},
   {path:'editprofile/:email' , component:EditprofileComponent},
-  {path:'admin' , component:AdminComponent},
+  {path:'admin' , component:AdminComponent,canActivate:[AdminGaurdService]},
   {path:'dresses' , component:DressesComponent},
   {path:'cart', component:CartComponent},
   {path:'chat' ,component:ChatComponent},
   {path:'advertise' , component:AdvertiseComponent},
+  {path:'editusers/:id',component:EditUserComponent},
   
   {path:'contact' , component:ContactComponent},
   
@@ -47,8 +52,13 @@ const routes: Routes = [
   {path:'about' , component:AboutComponent},
   
   {path:'fav' ,component:FavComponent},
-  {path:'**' , component:NotFoundComponent},
-  {path:'edituser/:id' ,component:AddUserComponent},
+  {path:'category' ,component:AddCategoryComponent},
+  {path:'editcategory/:id/:id1' ,component:AddCategoryComponent},
+  {path:'notfound' , component:NotFoundComponent},
+  {path:'accessdenied' , component:AccessdeniedComponent},
+  {path:'edituserrole/:id/:id1',component:EditUserRoleComponent},
+  // {path:'edituser/:id' ,component:AddUserComponent},
+  //{path:'**' , component:NotFoundComponent},
   
 
 

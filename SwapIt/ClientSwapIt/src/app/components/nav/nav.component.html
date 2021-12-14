@@ -13,7 +13,7 @@
           <a class="nav-link" aria-current="page" routerLink="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page"  routerLink="/admin" *ngIf="this.IsAdmin()">Dashboard</a>
+          <a class="nav-link" aria-current="page"  routerLink="/admin" *ngIf="IsAdmin()&&isUserIn()">Dashboard</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " aria-current="page"  routerLink="/about">About</a>

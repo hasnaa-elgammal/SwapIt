@@ -1,0 +1,29 @@
+
+<div class="container mt-4 mb-4">
+
+    <h2 class="text-center mb-4">{{title}}</h2>
+    <hr class="mb-4">
+    <button type="button" class="btn btn-primary mb-4"(click)="GoToList()">Return to Category List</button>
+    <div class="alert alert-success" role="alert" *ngIf="message">
+        <strong>{{message}}</strong>
+    </div>
+
+    <form class="row g-3" [formGroup]="catForm"(ngSubmit)="AddCategory()">
+
+        <div class="col-md-6">
+            <label for="catName" class="form-label">Category's Name <span class="required-asterisk">*</span></label>
+            <input name="catName" formControlName="catName"type="text" class="form-control" placeholder="Enter Category's name" required>
+            <div class="alert alert-danger" *ngIf="!this.catForm.get('catName').valid && this.catForm.get('catName').touched">First name is required</div>
+        </div>
+
+        <div class="form-check mb-3">
+        </div>
+
+        <div class= "col-12  mt-5">
+           <button type="submit" class="btn btn-dark" [disabled]="!(this.catForm.valid)" >{{btnTitle}}</button>
+        </div>
+
+    </form>
+
+</div>
+

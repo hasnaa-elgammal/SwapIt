@@ -15,4 +15,5 @@ export class UserModel {
     city: string;
     zipCode: string;
     password: string;
+    
 }

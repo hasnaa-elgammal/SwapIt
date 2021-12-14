@@ -1,42 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserModel } from 'src/app/models/UserModel';
-import { Users } from 'src/app/models/users.model';
+import { Category } from 'src/app/models/CategoryModel';
 import { AdminService } from 'src/app/services/admin.service';
-import { AuthService } from 'src/app/services/auth.service';
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-categry-list',
+  templateUrl: './categry-list.component.html',
+  styleUrls: ['./categry-list.component.css']
 })
-export class UsersComponent implements OnInit {
-  
+export class CategryListComponent implements OnInit {
+
   constructor(
     private service:AdminService,
-    private auth: AuthService,
-    private router:Router
+    private router:Router,
   ) { }
+
+  categories:Category[];
+  num:number;
   
 
-  users:Users[];
-  num:number;
   ngOnInit(): void {
-    
-    this.users=null;
+    this.categories=null;
     this.num=0;
-    this.getUsers();
-  }
-  getUsers() {
-    this.service.GetAllUsers().subscribe((list)=>{
-      this.users=list;
-   },err=>console.log(err));
+    this.getCategories();
   }
 
+  getCategories(){
+    this.service.GetAllCategories().subscribe(list=>{
+      this.categories=list;
+      console.log(this.categories);
+    },ex=>console.log(ex));
+  }
 
-  EditUserClick(id:string){
-    this.router.navigate(['/editusers',id]);
+  EditCategory(id:number,catName:string){
+    if(id){
+      this.router.navigate(['/editcategory',id,catName]);
+    }
+  }
+  AddCategory(){
+    this.router.navigate(['category']);
   }
 
   IsDelete(){
@@ -55,7 +58,7 @@ export class UsersComponent implements OnInit {
     var count=$(".ckitem:checked").length;
     this.num=count;
   }
-  
+
   DeleteConfirm(){
     var checkboxes=document.getElementsByClassName('ckitem');
     if(checkboxes.length > 0){
@@ -67,8 +70,8 @@ export class UsersComponent implements OnInit {
           }
          
        }
-       this.service.DeleteAll(ids).subscribe(s=>{
-         this.getUsers();
+       this.service.DeleteAllCategory(ids).subscribe(s=>{
+         this.getCategories();
          $("#btnClose").trigger("click");
        },ex=>console.log(ex));
     }
@@ -106,10 +109,5 @@ export class UsersComponent implements OnInit {
       });
     });
   }
-
-
-
-
-  
 
 }

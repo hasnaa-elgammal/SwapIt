@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="alert alert-primary mt-4" role="alert">
+        <strong>Edit User Role</strong>
+    </div>
+    <div class="col-md-5">
+    <form [formGroup]="userForm"(ngSubmit)="EditRoles()">
+        <div class="col-md-12">
+            <label for="inputEmail4" class="form-label">UserName <span class="required-asterisk">*</span></label>
+            <input name="userName" formControlName="userName" type="text" class="form-control"  required>
+            <div class="alert alert-danger" *ngIf="this.userForm.get('userName').errors?.required && this.userForm.get('userName').touched">UserName is required</div>
+            <div class="alert alert-danger" *ngIf="this.userForm.get('userName').errors?.userName && this.userForm.get('userName').touched">Invalid UserName</div>
+            <div class="alert alert-danger" *ngIf="this.existsmessage !='' && this.existsmessage !=null && this.userForm.get('userName').value !== null && this.userForm.get('userName').value !== '' && isEmailExists()">{{this.existsmessage}}</div>
+        </div>
+        <div class="form-group mt-3">
+          <label for="roleName">Users Roles</label>
+          <select class="form-control" formControlName="roleName" name="roleName" id="roleName" (change)="onRoleChange()">
+            <option *ngFor="let item of roles"[value]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+        <div class="btn-area">
+            <button type="submit" class="btn btn-primary"[disabled]="userForm.invalid">Update</button>
+        </div>
+    </form>
+    </div>
+</div>

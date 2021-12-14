@@ -31,6 +31,13 @@ import { ResetpasswordComponent } from './accounts/resetpassword/resetpassword.c
 import { EditprofileComponent } from './accounts/editprofile/editprofile.component';
 import { UsersComponent } from './accounts/admin/users/users.component';
 import { AddUserComponent } from './accounts/admin/add-user/add-user.component';
+import { EditUserComponent } from './accounts/admin/edit-user/edit-user.component';
+import { UserRolesComponent } from './accounts/admin/user-roles/user-roles.component';
+import { AccessdeniedComponent } from './components/accessdenied/accessdenied.component';
+import { AdminGaurdService } from './gaurds/admin-gaurd.service';
+import { EditUserRoleComponent } from './accounts/admin/edit-user-role/edit-user-role.component';
+import { CategryListComponent } from './accounts/admin/Categories/categry-list/categry-list.component';
+import { AddCategoryComponent } from './accounts/admin/Categories/add-category/add-category.component';
 
 
 @NgModule({
@@ -59,6 +66,12 @@ import { AddUserComponent } from './accounts/admin/add-user/add-user.component';
     EditprofileComponent,
     UsersComponent,
     AddUserComponent,
+    EditUserComponent,
+    UserRolesComponent,
+    AccessdeniedComponent,
+    EditUserRoleComponent,
+    CategryListComponent,
+    AddCategoryComponent,
     
     
     
@@ -78,7 +91,7 @@ import { AddUserComponent } from './accounts/admin/add-user/add-user.component';
     
     
   ],
-  providers: [],
+  providers: [AdminGaurdService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
