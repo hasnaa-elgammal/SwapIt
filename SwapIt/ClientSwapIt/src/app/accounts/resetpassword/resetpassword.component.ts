@@ -32,7 +32,7 @@ export class ResetpasswordComponent implements OnInit {
     this.userForm = this.fb.group({
       oldPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      confirmNewPassword: ['', Validators.required],
+      confirmNewPassword: ['', Validators.required]
     });
   }
 
@@ -40,8 +40,10 @@ export class ResetpasswordComponent implements OnInit {
     if (this.userForm.valid){
         this.validateModel();
         this.service.ResetPassword(this.model).subscribe(success => {
+          this.dangerMessage ='';
           this.successMessage = 'Reset Password successfully!';
         }, err => {
+          this.successMessage='';
           this.dangerMessage = 'Cannot reset password, Please Try Again!';
         });
     } 
@@ -54,8 +56,7 @@ export class ResetpasswordComponent implements OnInit {
 
   passwordsNotMatch(){
     if (this.userForm.value.newPassword !=='' && this.userForm.value.confirmNewPassword !== ''){
-      if((this.userForm.value.newPassword !== this.userForm.value.confirmNewPassword) && 
-      (this.userForm.value.newPassword.length >5) && (this.userForm.value.confirmNewPassword.length >5)){
+      if((this.userForm.value.newPassword !== this.userForm.value.confirmNewPassword)){
         return true;
       }
     }
