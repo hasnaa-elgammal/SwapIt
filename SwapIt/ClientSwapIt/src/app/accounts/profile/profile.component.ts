@@ -27,8 +27,10 @@ export class ProfileComponent implements OnInit {
   faHeart= faHeart;
   faCartPlus=faCartPlus;
   faStar=faStar;
+  
 
   products: Product[] = [
+    
     {category:'Bages',photo:'assets/bag.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
     {category:'Books',photo:'assets/book.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
     {category:'Clothes',photo:'assets/clothes.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},

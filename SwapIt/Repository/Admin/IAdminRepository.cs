@@ -10,10 +10,10 @@ namespace SwapIt.Repository.Admin
 {
     public interface IAdminRepository
     {
-        Task<IEnumerable<User>> GetUsers();
-        Task<User> AddUserAsync(AddUsersModel model);
-        Task<User> GetUserAsync(string id);
-        Task<User> EditUserAsync(EditUserModel model);
+        Task<IEnumerable<SwapIt.Models.User>> GetUsers();
+        Task<SwapIt.Models.User> AddUserAsync(AddUsersModel model);
+        Task<SwapIt.Models.User> GetUserAsync(string id);
+        Task<SwapIt.Models.User> EditUserAsync(EditUserModel model);
         Task<bool> DeleteUserAsync(List<string> ids);
         Task <IEnumerable<UserRoleModel>> GetUserRoleAsync();
         Task<IEnumerable<Role>> GetRolesAsync();
@@ -22,5 +22,8 @@ namespace SwapIt.Repository.Admin
         Task<Category> AddCategoryAsync(Category model);
         Task<Category> EditCategoryAsync(Category model);
         Task<bool> DeleteCategoriesAsync(List<string> ids);
+
+        Task<IEnumerable<Product>> GetProducts();
+        Task<Product> AddProduct(Product product);
     }
 }

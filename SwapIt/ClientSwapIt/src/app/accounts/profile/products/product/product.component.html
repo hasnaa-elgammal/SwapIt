@@ -1,0 +1,95 @@
+<!-- <table id="tbl" class="table table-response bg-light border">
+    <thead>
+        <tr class="bg-dark text-light">
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Product Quantity</th>
+            <th>Product Description</th>
+            <th>For Swap</th>
+            <th>For Sale</th>
+            <th></th>
+            <th>
+                <input id="first" type="checkbox" class="ckheader" (change)="SelectAll()" >
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td scope="row">{{product.productName}}</td>
+            <td>{{product.productPrice}}</td>
+            <td>{{product.productQuantity}}</td>
+            <td>{{product.productDescription}}</td>
+            <td>{{product.forswap}}</td>
+            <td>{{product.forsell}}</td>
+            <td>Swap</td>
+
+            <td>
+                <div >
+                    <button type="button" class="btn btn-primary btn-sm" (click)="EditUserClick(user.id)">Edit</button>
+                </div>
+            </td>
+            <td>
+                <input type="checkbox" class="ckitem" id="ckitem" value="{{user.id}}">
+            </td>
+        </tr>
+        <tr>
+            <td scope="row"></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table> -->
+<div class="alert alert-primary" role="alert">
+    <strong>Profile Products</strong>
+</div>
+<div>
+    <!-- <button type="button"class="btn btn-success mb-3">Add Product</button> -->
+    <!-- <button type="button"class="btn btn-success mb-3"(click)="AddUser()">Add Product</button> -->
+</div>
+
+<div class="container">
+    <div class="row" *ngFor="let product of products">
+        <div class="" >
+        <div class="card" >
+            This is an image
+        <img [src]="photo" class="card-img-top" height="200px">
+        <div class="card-body">
+          <h5 class="card-title">
+              {{product.productName}}
+          </h5>
+          <p class="card-text">{{product.productDescription}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            
+            <div >
+              <p class="card-text"><small class="text-muted">BY:</small> {{product.userId}}</p>
+
+            </div>
+         
+        </li>
+        <div>
+          <li class="list-group-item">{{product.productPrice  | currency}}
+            <button type="button" class="btn btn-dark">Swap</button>
+            <button type="button" class="btn btn-dark" id ="del">Delete</button>
+            <button type="button" class="btn btn-dark" id ="edi">Edit</button>
+            
+            <div class="card-body">
+            <a class="card-link " routerLink="/fav"><fa-icon [icon]="faHeart"></fa-icon></a>
+            <a  class="card-link" routerLink="/cart"><fa-icon [icon]="faCartPlus "></fa-icon></a>
+
+            </div>
+         
+            </li>
+       </div>
+          
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+
+        </ul>
+       
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SwapIt.Models;
 using SwapIt.ModelViews.users;
@@ -13,10 +14,10 @@ namespace SwapIt.Repository.Admin
     {
         
         private readonly ApplicationDB _db;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<SwapIt.Models.User> _userManager;
         private readonly RoleManager<Role> _rolemanager;
 
-        public AdminRepo(ApplicationDB db,UserManager<User> userManager,RoleManager<Role> rolemanager)
+        public AdminRepo(ApplicationDB db,UserManager<SwapIt.Models.User> userManager,RoleManager<Role> rolemanager)
             {
                 _db = db;
                 _userManager = userManager;
@@ -35,14 +36,14 @@ namespace SwapIt.Repository.Admin
             return category;
         }
 
-        public async Task<User> AddUserAsync(AddUsersModel model)
+        public async Task<SwapIt.Models.User> AddUserAsync(AddUsersModel model)
         {
             if (model == null)
             {
                 return null;
             }
 
-            var user = new User
+            var user = new SwapIt.Models.User
             {
                 UserName=model.Email,
                 FirstName=model.FirstName,
@@ -142,7 +143,7 @@ namespace SwapIt.Repository.Admin
             return category;
         }
 
-        public async Task<User> EditUserAsync(EditUserModel model)
+        public async Task<SwapIt.Models.User> EditUserAsync(EditUserModel model)
         {
             if (model.Id == null)
             {
@@ -223,7 +224,7 @@ namespace SwapIt.Repository.Admin
             return await _db.Roles.ToListAsync();
         }
 
-        public async Task<User> GetUserAsync(string id)
+        public async Task<SwapIt.Models.User> GetUserAsync(string id)
         {
             if (id == null)
             {
@@ -272,11 +273,44 @@ namespace SwapIt.Repository.Admin
                 
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<SwapIt.Models.User>> GetUsers()
         {
             return await _db.Users.ToListAsync();
         }
 
+        public async Task<IEnumerable<Product>> GetProducts()
+        {
+            //string parameterUserId;
+            //return await _db.Products.Where(x => x.UserId == parameterUserId).Select(x => x.ProductName).FirstOrDefault();
+            return await _db.Products.ToListAsync();
+            // Where(x => x.Id == role.RoleId).Select(x => x.Name).FirstOrDefaultAsync();
 
+        }
+
+        public async Task<Product> AddProduct(Product product)
+        {
+            if(product == null)
+            {
+                return null;
+            }
+            var pro = new Product();
+            
+            //pro.ProductId =  product.ProductId;
+            pro.UserId = "7d8cf7c4-4860-4fca-bf81-90565d736c56";
+            pro.DepartmentId = 1;
+            pro.ProductName = product.ProductName;
+            pro.ProductPrice = product.ProductPrice;
+            pro.ProductQuantity = product.ProductQuantity;
+            pro.ProductSize = product.ProductSize;
+            pro.ProductDescription = product.ProductDescription;
+            pro.Forswap = product.Forswap;
+            pro.Forsell = product.Forsell;
+
+            var result = await _db.Products.AddAsync(pro);
+            return pro;
+
+            
+            
+        }
     }
 }

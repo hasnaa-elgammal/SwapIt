@@ -32,12 +32,15 @@
           <button class="button" routerLink="/advertise">Post your Product </button>
           <button class="button" [routerLink]="['/editprofile', this.email]">Edit your Profile</button>
           
-
+          <app-product></app-product>
+          
         </div>
-        <div class="container">
-          <div class="row">
+        
+
+        <!-- <div class="container" >
+          <div class="row" *ngFor="let product of products">
               <div class="" >
-              <div class="card" *ngFor="let product of products">
+              <div class="card" >
               <img [src]="product.photo" class="card-img-top" height="200px">
               <div class="card-body">
                 <h5 class="card-title">
@@ -74,11 +77,12 @@
              
             </div>
           </div>
-      </div>
+        </div>
+    
       
-      </div>
+      </div> -->
       
-      
+    
         
 </div>   
 </div>

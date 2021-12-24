@@ -41,7 +41,7 @@ namespace SwapIt
             services.AddControllers();
 
             services.AddDbContext<ApplicationDB>(options => 
-            options.UseSqlServer(Configuration.GetConnectionString("Hasnaa")));
+            options.UseSqlServer(Configuration.GetConnectionString("Nadine")));
 
             services.AddIdentity<User, Role>(options =>
             {

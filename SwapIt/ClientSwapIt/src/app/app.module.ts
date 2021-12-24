@@ -38,6 +38,8 @@ import { AdminGaurdService } from './gaurds/admin-gaurd.service';
 import { EditUserRoleComponent } from './accounts/admin/edit-user-role/edit-user-role.component';
 import { CategryListComponent } from './accounts/admin/Categories/categry-list/categry-list.component';
 import { AddCategoryComponent } from './accounts/admin/Categories/add-category/add-category.component';
+import { ProductsComponent } from './profile/products/products.component';
+import { ProductComponent } from './accounts/profile/products/product/product.component';
 
 
 @NgModule({
@@ -72,6 +74,8 @@ import { AddCategoryComponent } from './accounts/admin/Categories/add-category/a
     EditUserRoleComponent,
     CategryListComponent,
     AddCategoryComponent,
+    ProductsComponent,
+    ProductComponent,
     
     
     
