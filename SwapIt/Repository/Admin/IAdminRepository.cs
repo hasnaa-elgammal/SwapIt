@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SwapIt.ModelViews.users;
+using SwapIt.ModelViews;
 
 namespace SwapIt.Repository.Admin
 {
@@ -24,6 +25,6 @@ namespace SwapIt.Repository.Admin
         Task<bool> DeleteCategoriesAsync(List<string> ids);
 
         Task<IEnumerable<Product>> GetProducts();
-        Task<Product> AddProduct(Product product);
+
     }
 }

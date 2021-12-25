@@ -1,4 +1,4 @@
-.container{
+/* .container{
     margin-top:100px;
 }
 
@@ -56,9 +56,30 @@
 }
 button:hover{
     box-shadow: 0px 7px 30px rgba(164, 167, 170, 0.75);
+} */
+
+h2{
+    margin-top: 50px;
+    margin-bottom: 40px;
 }
 
+label{
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   margin-bottom: 10px;
+   margin-top: 10px;
+}
 
+button{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.required-asterisk{
+    color: red;
+    font-weight: bold;
+    margin-left: 3px;
+    font-size: 1.2em;
+}
 
      
 

@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private auth: AuthService,
+    public auth: AuthService,
     
     ) {
     _activatedRoute.params.subscribe(params =>
@@ -76,7 +76,7 @@ export class ProfileComponent implements OnInit {
     if(this.user.userImage==null){
       return "assets/default.jpg"
     }else{
-      return this.user.userImage
+      return 'assets/images/users/' + this.user.userImage
     }
   }
 

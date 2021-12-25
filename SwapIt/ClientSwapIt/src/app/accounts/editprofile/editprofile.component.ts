@@ -19,8 +19,9 @@ export class EditprofileComponent implements OnInit {
   email:string;
   successMessage : string;
   editmodel: EditModel
-  user: Users;
   closeResult: string | undefined;
+  image: File;
+  urlimage: string
   constructor(
     private fb: FormBuilder,
     private _activatedRoute: ActivatedRoute,
@@ -37,9 +38,11 @@ export class EditprofileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.user = new Users();
+    this.urlimage='assets/default.jpg';
+    this.image = null;
     this.successMessage = '';
     this.editmodel = {
+      image: '',
       email:'',
       firstName: '',
       lastName: '',
@@ -49,6 +52,7 @@ export class EditprofileComponent implements OnInit {
       phoneNumber: ''
     }
     this.userForm = this.fb.group({
+      image: null,
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       country: ['', Validators.required],
@@ -64,34 +68,52 @@ export class EditprofileComponent implements OnInit {
     this.auth.GetProfile(this.email).subscribe(success=> {
       var u = success;
       if (u != null){
-        this.user.firstName = u.firstName;
-        this.user.lastName = u.lastName;
-        this.user.email = u.email;
-        this.user.county = u.county;
-        this.user.city = u.city;
-        this.user.userImage = u.userImage;
-        this.user.phoneNumber= u.phoneNumber;
-
         this.userForm.patchValue({
-            firstName: this.user.firstName,
-            lastName: this.user.lastName,
-            country: this.user.county,
-            city: this.user.city,
-            zipCode: this.user.zipcode,
-            phoneNumber: this.user.phoneNumber
+            firstName: u.firstName,
+            lastName: u.lastName,
+            country: u.county,
+            city: u.city,
+            zipCode: u.zipcode,
+            phoneNumber: u.phoneNumber
         });
+
+        if(u.userImage!= '' && u.userImage != null){
+          this.urlimage = 'assets/images/users/'+ u.userImage;
+        }
+
       }
 
     },err=>console.log(err));
   }
 
+  imageprocess(event: any){
+    if(event.target.files!== null && event.target.files.length >0){
+      this.image = event.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        $('#userimage').attr('src', reader.result.toString());
+      }
+      reader.readAsDataURL(this.image);
+    } 
+  }
+
   edit(){
       if (this.userForm.valid){
         this.validateEditModel();
-        this.edit
-        this.auth.EditProfile(this.editmodel).subscribe(success => {
+        const formdata = new FormData();
+        formdata.append('image', this.image);
+        formdata.append('firstName', this.editmodel.firstName);
+        formdata.append('lastName', this.editmodel.lastName);
+        formdata.append('email', this.editmodel.email);
+        formdata.append('country', this.editmodel.country);
+        formdata.append('city', this.editmodel.city);
+        formdata.append('zipCode', this.editmodel.zipCode);
+        formdata.append('phoneNumber', this.editmodel.phoneNumber);
+        this.auth.EditProfile(formdata).subscribe(success => {
           this.successMessage = 'Edited successfully!';
-        }, err => console.log(err));        
+        }, err => {
+          console.log(err);
+          this.successMessage=''});        
       } 
   }
 

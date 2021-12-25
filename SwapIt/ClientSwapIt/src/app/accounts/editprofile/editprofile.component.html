@@ -8,10 +8,18 @@
     </div>
 
     <form class="row g-3"(ngSubmit)="edit()" [formGroup]="userForm">
+        <div class="col-12"> 
+            <img id="userimage" [src]="urlimage" width="80px" height="80px" style="">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile" formControlName="image" (change)="imageprocess($event)">
+                <label class="custom-file-label" for="customFile" *ngIf="this.userForm.value.image == null">Choose image</label>
+                <label class="custom-file-label" for="customFile" *ngIf="this.userForm.value.image != null">{{this.userForm.value.image}}</label>
+            </div>
+        </div>
 
         <div class="col-md-6">
             <label for="inputName" class="form-label">First Name <span class="required-asterisk">*</span></label>
-            <input name="firstname" formControlName="firstName"type="text" class="form-control" placeholder="Enter Your first name" required value="this.userForm.firstName">
+            <input name="firstname" formControlName="firstName" type="text" class="form-control" placeholder="Enter Your first name" required>
             <div class="alert alert-danger" *ngIf="!this.userForm.get('firstName').valid && this.userForm.get('firstName').touched">First name is required</div>
         </div>
 
@@ -59,16 +67,20 @@
 
     <ng-template #content let-modal>
         <div class="modal-header">
-          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
+            <h6 class="modal-title">Delete Your Account</h6>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <div class=" ">
             <div class="card" id="view">
                 <div class= "col-12 text-center">
-                    <span class="d-block my-3">Are You sure?</span>
-                    <button class="btn btn-danger mb-3" (click)="delete()" (click)="modal.close('Save click')">Delete</button>
+                    <span class="d-block my-3">Are You sure?</span>   
                  </div>
+                <div class="modal-footer">
+                <button id="btClose" type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Close</button>
+                <button type="button" class="btn btn-danger" (click)="delete()" (click)="modal.close('Save click')">Delete</button>
+            </div>
             </div>
         </div>
       </ng-template>

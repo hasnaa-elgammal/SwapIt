@@ -41,7 +41,7 @@ namespace SwapIt
             services.AddControllers();
 
             services.AddDbContext<ApplicationDB>(options => 
-            options.UseSqlServer(Configuration.GetConnectionString("Nadine")));
+            options.UseSqlServer(Configuration.GetConnectionString("Hasnaa")));
 
             services.AddIdentity<User, Role>(options =>
             {
@@ -77,6 +77,8 @@ namespace SwapIt
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+        
             app.UseRouting();
 
             app.UseCors(x => x.WithOrigins("http://localhost:4200").WithOrigins("http://127.0.0.1:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials());

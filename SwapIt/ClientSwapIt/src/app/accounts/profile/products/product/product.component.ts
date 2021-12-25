@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/categories/interfaces/product.interface';
 import { ProductModel } from 'src/app/models/ProductModel';
-import { ProductsComponent } from 'src/app/profile/products/products.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';

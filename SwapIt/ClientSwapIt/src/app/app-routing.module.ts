@@ -28,6 +28,8 @@ import { AccessdeniedComponent } from './components/accessdenied/accessdenied.co
 import { AdminGaurdService } from './gaurds/admin-gaurd.service';
 import { EditUserRoleComponent } from './accounts/admin/edit-user-role/edit-user-role.component';
 import { AddCategoryComponent } from './accounts/admin/Categories/add-category/add-category.component';
+import { ForgotpasswordComponent } from './accounts/forgotpassword/forgotpassword.component';
+import { ForgotresetpassComponent } from './accounts/forgotresetpass/forgotresetpass.component';
 
 
 const routes: Routes = [
@@ -38,6 +40,8 @@ const routes: Routes = [
   {path:'profile/:email' , component:ProfileComponent},
   {path:'resetpassword' , component:ResetpasswordComponent},
   {path:'editprofile/:email' , component:EditprofileComponent},
+  {path:'forgotpassword' , component:ForgotpasswordComponent},
+  {path:'resetforgotpassword' , component:ForgotresetpassComponent},
   {path:'admin' , component:AdminComponent,canActivate:[AdminGaurdService]},
   {path:'dresses' , component:DressesComponent},
   {path:'cart', component:CartComponent},

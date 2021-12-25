@@ -24,16 +24,14 @@
             
           </div>
           
-
           <div class="ctr">
-            <button class="button"  routerLink="/chat"> Contact with me  <span class="icon"><fa-icon  [icon]="faCommentAlt"></fa-icon></span></button>
-            <button class="button">Follow Me </button>
+            <button class="button"  routerLink="/chat" *ngIf="this.auth.email != this.email"> Contact with me  <span class="icon"><fa-icon  [icon]="faCommentAlt"></fa-icon></span></button>
+            <button class="button" *ngIf="this.auth.email != this.email">Follow Me </button>
           </div>
-          <button class="button" routerLink="/advertise">Post your Product </button>
-          <button class="button" [routerLink]="['/editprofile', this.email]">Edit your Profile</button>
+          <button class="button" routerLink="/advertise" *ngIf="this.auth.email == this.email">Post your Product </button>
+          <button class="button" [routerLink]="['/editprofile', this.email]" *ngIf="this.auth.email == this.email">Edit your Profile</button>
           
-          <app-product></app-product>
-          
+
         </div>
         
 

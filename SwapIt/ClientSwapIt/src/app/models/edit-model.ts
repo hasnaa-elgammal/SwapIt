@@ -1,4 +1,5 @@
 export class EditModel {
+    image: string;
     firstName: string;
     lastName: string;
     email: string;

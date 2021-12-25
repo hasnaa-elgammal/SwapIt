@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EditModel } from '../models/edit-model';
+import { ForgotModel } from '../models/ForgotModel';
 import { ResetModel } from '../models/resetpass-model';
 import { Users } from '../models/users.model';
 import { CryptService } from './crypt.service';
@@ -39,8 +40,8 @@ export class AuthService {
     return this.http.get<Users>('https://localhost:44329/Accounts/Profile/'+email, {withCredentials: true}).pipe()
   }
   
-  EditProfile(model: EditModel): Observable<EditModel> {
-    return this.http.post<EditModel>('https://localhost:44329/Accounts/EditProfile', model, this.headers).pipe();
+  EditProfile(model: FormData) {
+    return this.http.post('https://localhost:44329/Accounts/EditProfile', model, {withCredentials: true}).pipe();
   }
 
   DeleteProfile(email: string){
@@ -49,6 +50,14 @@ export class AuthService {
   
   ResetPassword(model: ResetModel): Observable<ResetModel> {
     return this.http.post<ResetModel>('https://localhost:44329/Accounts/ResetPassword', model, this.headers).pipe();
+  }
+
+  ForgotPassword(email: string){
+    return this.http.get('https://localhost:44329/Accounts/ForgotPassword/'+email,{withCredentials: true}).pipe();
+  }
+
+  ResetForgotPassword(model: ForgotModel): Observable<ForgotModel> {
+    return this.http.post<ForgotModel>('https://localhost:44329/Accounts/ResetForgotPassword', model, this.headers).pipe();
   }
 
   public installStorage(remember: boolean, email: string){

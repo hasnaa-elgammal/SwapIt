@@ -1,66 +1,71 @@
 <div class="container">
-    <div class="profile-card js-profile-card">
-        
-      <div>
-        <form class="row g-3" (ngSubmit)="AddProduct()" [formGroup]="productForm">
-            
-          <label for="productDescription" class="form-label">Choose your Product Photo</label>
-          <input formControlName="productDescription" class="form-control form-control-lg" id="productDescription" type="text">
-            
-
-          <!-- <label for="inputName" class="form-label">First Name <span class="required-asterisk">*</span></label>
-          <input name="firstname" formControlName="firstName"type="text" class="form-control" placeholder="Enter Your first name" required>
-             -->
-
-          <input class="form-control" type="text" formControlName="productQuantity" placeholder="Enter Your Product Quantity" aria-label="default input example">
-
-          <input formControlName="productName" class="form-control" type="text" placeholder="Enter Your Product Name" aria-label="default input example">
-          <!-- <input formControlName="productName" class="form-control" type="text" placeholder="Enter The Category Name" aria-label="default input example"> -->
-
-          <!-- <div class="dropdown show">
-            <a class="btn btn-light dropdown-toggle" (click)="toggleNav()" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-             Chosse your Product Category
-            </a>
-          
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" [class.show]="isOpen">
-              <li><a class="dropdown-item" >Clothes</a></li>
-              <li><a class="dropdown-item" >Books</a></li>
-              <li><a class="dropdown-item" >Something else </a></li>
-            </ul>
-          </div> -->
-
-          <!-- <div class="dropdown">
-
-            <a class="btn btn-light dropdown-toggle" (click)="toggleNav()" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-             Chosse you want Sell or Swap 
-            </a>
-            
-          
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" [class.show]="isOpen">
-              <li><a class="dropdown-item" >buy</a></li>
-              <li><a class="dropdown-item" >Swap</a></li>
-            </ul>
-
-        </div> -->
-        
-        
-        <div class="form-ckeck">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" name="" id ="" value="swap" checked/>
-                  Swap
-                </label>
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input " name="" id ="" value="sell" checked/>
-                  Sale
-                </label>
-        </div>
-      
-
-        <input  id="price  " class="form-control" type="text" placeholder="Enter price" aria-label="default input example">
-
-        <button class="button"> ADD Product </button>
-        <!-- <button class="button"  routerLink="/profile"> ADD Product </button> -->
-  
-      </form>  
+    <h2 class="text-center">Add your product</h2>
+    <div class="alert alert-success fade show" role="alert" *ngIf="this.successMessage != null && this.successMessage != ''">
+        <span>{{this.successMessage}}</span>
     </div>
-  </div>
+    <div>
+    <form class="row g-3" (ngSubmit)="AddProduct()" [formGroup]="productForm">
+      <div class="col-12"> 
+          <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile" formControlName="image" (change)="imageprocess($event)">
+              <label class="custom-file-label" for="customFile" *ngIf="this.productForm.value.image == null">Choose image</label>
+              <label class="custom-file-label" for="customFile" *ngIf="this.productForm.value.image != null">{{this.productForm.value.image}}</label>
+          </div>
+      </div>
+      <div class="col-md-12">
+          <label for="productName" class="form-label">Product Name <span class="required-asterisk">*</span></label>
+          <input formControlName="productName" class="form-control" type="text" placeholder="Enter Your Product Name" aria-label="default input example">
+          <div class="alert alert-danger" *ngIf="this.productForm.get('productName').errors?.required && this.productForm.get('productName').touched">Product Name is required</div>
+      </div> 
+
+        <div class="col-md-12">
+          <label for="productName" class="form-label">Department of Product <span class="required-asterisk">*</span></label>
+          <select class="form-control" formControlName="productDepartment" >
+          <option [ngValue]="-1" disabled>Choose Department</option>
+          <option *ngFor="let department of departments" [ngValue]="department.departmentId">{{department.departmentName}}</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="this.productForm.get('productDepartment').value == -1 && this.productForm.get('productDepartment').touched">Product Department is required</div>
+      </div> 
+
+
+
+      <div class="col-md-12">
+          <label for="productQuantity" class="form-label">Product Quantity <span class="required-asterisk">*</span></label>
+          <input formControlName="productQuantity" class="form-control" type="number" placeholder="Enter Your Product Quantity" aria-label="default input example">
+          <div class="alert alert-danger" *ngIf="this.productForm.get('productQuantity').errors?.required && this.productForm.get('productQuantity').touched">Product Quantity is required</div>
+      </div> 
+              <div class="col-md-12">
+          <label for="productPrice" class="form-label">Product Price <span class="required-asterisk">*</span></label>
+          <input formControlName="productPrice" class="form-control" type="number" placeholder="Enter Your Product Price" aria-label="default input example">
+          <div class="alert alert-danger" *ngIf="this.productForm.get('productPrice').errors?.required && this.productForm.get('productPrice').touched">Product Price is required</div>
+      </div> 
+
+      <div class="col-md-12">
+          <label for="productSize" class="form-label">Product Size</label>
+          <input formControlName="productSize" class="form-control" type="text" placeholder="Enter Your Product Size" aria-label="default input example">
+      </div> 
+
+      <div class="col-md-12">
+          <label for="productDescription" class="form-label">Product Description </label>
+          <textarea formControlName="productDescription" class="form-control" placeholder="Enter Your Product Description" aria-label="default input example">
+          </textarea>
+      </div> 
+          
+
+
+      <div class="form-ckeck col-12">
+          <label class="form-check-label col-6">
+            <input formControlName="forswap" type="checkbox" class="form-check-input" name="" id ="" value="swap" checked/>
+            Swap
+          </label>
+          <label class="form-check-label col-6">
+            <input formControlName="forsell" type="checkbox" class="form-check-input " name="" id ="" value="sell" checked/>
+            Sale
+          </label>
+      </div>
+
+      <div class= "col-12 text-center">
+          <button class="btn btn-dark" [disabled]="!(this.productForm.valid) || this.productForm.get('productDepartment').value == -1"> ADD Product </button>
+      </div>
+    </form>  
+</div>

@@ -8,6 +8,8 @@ namespace SwapIt.ModelViews
 {
     public class EditModel
     {
+        public string Image { get; set; }
+
         [StringLength(256), Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 

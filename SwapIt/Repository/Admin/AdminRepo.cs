@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SwapIt.Models;
+using SwapIt.ModelViews;
 using SwapIt.ModelViews.users;
 using System;
 using System.Collections.Generic;
@@ -287,30 +288,6 @@ namespace SwapIt.Repository.Admin
 
         }
 
-        public async Task<Product> AddProduct(Product product)
-        {
-            if(product == null)
-            {
-                return null;
-            }
-            var pro = new Product();
-            
-            //pro.ProductId =  product.ProductId;
-            pro.UserId = "7d8cf7c4-4860-4fca-bf81-90565d736c56";
-            pro.DepartmentId = 1;
-            pro.ProductName = product.ProductName;
-            pro.ProductPrice = product.ProductPrice;
-            pro.ProductQuantity = product.ProductQuantity;
-            pro.ProductSize = product.ProductSize;
-            pro.ProductDescription = product.ProductDescription;
-            pro.Forswap = product.Forswap;
-            pro.Forsell = product.Forsell;
 
-            var result = await _db.Products.AddAsync(pro);
-            return pro;
-
-            
-            
-        }
     }
 }

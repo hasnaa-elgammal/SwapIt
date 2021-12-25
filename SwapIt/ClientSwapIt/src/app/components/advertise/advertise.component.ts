@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
+import { AddProductModel } from 'src/app/models/AddProductModel';
+import { Department } from 'src/app/models/DepartmentModel';
 import { ProductModel } from 'src/app/models/ProductModel';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,28 +13,30 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./advertise.component.css']
 })
 export class AdvertiseComponent implements OnInit {
-  errorMsg: any;
+  
 
   constructor(
     private fb: FormBuilder,
-    private service: UserService
+    private service: UserService,
+    private auth: AuthService
 
   ) { }
-  message:string;
-  productForm: FormGroup;
-  product: ProductModel;
-  products: ProductModel[];
-  isBusy: boolean;
-  regx = RegExp;
-  isOpen:boolean= false;
+  image: File;
+  successMessage:string;
+  productForm!: FormGroup;
+  product: AddProductModel;
+  email = this.auth.email;
+  departments:Department[];
+  d: Department;
 
   ngOnInit(): void {
-    this.isBusy =false;
+    this.successMessage ='';
+
+    this.GetAllDepartments();
+
     this.product = {
-    
-      productId: null,
-      userId: '',
-      departmentId: 1,
+      userEmail: '',
+      departmentId: 0,
       productName: '',
       productPrice: 0,
       productQuantity: 0,
@@ -39,62 +44,75 @@ export class AdvertiseComponent implements OnInit {
       productDescription: '',
       forswap: true,
       forsell: true
-
     };
 
-
     this.productForm = this.fb.group({
-      // email: ['', [Validators.required, Validators.email]],
-      // firstName: ['', Validators.required],
-      // lastName: ['', Validators.required],
-      // country: ['', Validators.required],
-      // city: '',
-      // zipCode: '',
-      // password: ['', [Validators.required, Validators.minLength(6)]],
-      // confirmPassword: ['', Validators.required],
-
-      productId: null,
-      userId: '',
-      departmentId: 1,
-      productName: '',
-      productPrice: 0,
-      productQuantity: 0,
+      image: null,
+      productName: ['', Validators.required],
+      productPrice: [0, Validators.required],
+      productDepartment: -1,
+      productQuantity: [0, Validators.required],
       productSize: '',
       productDescription: '',
       forswap: true,
       forsell: true
-      
-      
     });
 
   }
 
-  toggleNav(){
-    this.isOpen=! this.isOpen
-  }
+
   AddProduct(){
-    
-      //this.product.productId = this.productForm.value.productId;
-      //this.product.userId = this.productForm.value.userId;
+
+    if(this.productForm.valid){
+      this.ValidateProduct();
+      const formdata = new FormData();
+        formdata.append('image', this.image);
+        formdata.append('productName', this.product.productName);
+        formdata.append('productPrice', this.product.productPrice.toString());
+        formdata.append('departmentId', this.product.departmentId.toString());
+        formdata.append('userEmail', this.product.userEmail);
+        formdata.append('productQuantity', this.product.productQuantity.toString());
+        formdata.append('productDescription', this.product.productDescription);
+        formdata.append('forsell', this.product.forsell.toString());
+        formdata.append('forswap', this.product.forswap.toString());
+      this.service.AddProduct(formdata).subscribe(s => {
+        this.successMessage = 'Product Added Successfully';
+      }, ex => {
+        this.successMessage='';
+        console.log(ex);
+      })
+    }
+  }
+
+  imageprocess(event: any){
+    if(event.target.files!== null && event.target.files.length >0){
+      this.image = event.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        $('#userimage').attr('src', reader.result.toString());
+      }
+      reader.readAsDataURL(this.image);
+    } 
+  }
+  
+  ValidateProduct(){
+    if(this.productForm.valid){
+
+      this.product.departmentId = this.productForm.value.productDepartment;
+      this.product.userEmail = this.email;
       this.product.productName = this.productForm.value.productName;
       this.product.productPrice = this.productForm.value.productPrice;
       this.product.productQuantity = this.productForm.value.productQuantity;
-      this.product.productSize = this.productForm.value.productSize;
       this.product.productDescription = this.productForm.value.productDescription;
       this.product.forswap = this.productForm.value.forswap;
       this.product.forsell = this.productForm.value.forsell;
-      // this.product.departmentId = this.productForm.value.departmentId;
-      // this.service.AddProduct(this.product).subscribe(s=>{
-      // this.ngOnInit();
-      // this.message='The Product is Added Successfully';
-      // }, ex => this.errorMsg=ex);
+    }
+  }
 
-      this.service.AddProduct(this.product).subscribe(s => {
-        this.message = 'Product Added Successfully';
-      }, ex => this.errorMsg = ex)
-      
-    
-
+  GetAllDepartments(){
+    this.service.GetAllDepartments().subscribe(list => {
+      this.departments = list;
+    }, err =>{console.log(err);})
   }
  
 
