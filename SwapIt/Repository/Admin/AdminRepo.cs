@@ -225,6 +225,45 @@ namespace SwapIt.Repository.Admin
             return await _db.Roles.ToListAsync();
         }
 
+        public async Task<IEnumerable<CategoryDepartment>> GetSubCategoriesAsync()
+        {
+            return await _db.CategoryDepartments.ToListAsync();//.Include(x => x.DepartmentId)
+        }
+
+        public async Task<CategoryDepartment> AddSubCategoryAsync(CategoryDepartment model)
+        {
+            var categoryDepartment = new CategoryDepartment
+            {
+                DepartmentName = model.DepartmentName,
+                CategoryId = model.CategoryId
+            };
+            _db.CategoryDepartments.Add(categoryDepartment);
+            await _db.SaveChangesAsync();
+            return categoryDepartment;
+
+        }
+        public async Task<CategoryDepartment> EditSubCategoryAsync(CategoryDepartment model)
+        {
+            if (model == null || model.DepartmentId < 1)
+            {
+                return null;
+            }
+            var subCategory = await _db.CategoryDepartments.FirstOrDefaultAsync(x => x.DepartmentId == model.DepartmentId);
+            if (subCategory == null)
+            {
+                return null;
+            }
+            _db.CategoryDepartments.Attach(subCategory);
+            subCategory.DepartmentName = model.DepartmentName;
+            subCategory.CategoryId = model.CategoryId;
+
+            _db.Entry(subCategory).Property(x => x.DepartmentName).IsModified = true;
+            _db.Entry(subCategory).Property(x => x.CategoryId).IsModified = true;
+
+            await _db.SaveChangesAsync();
+            return subCategory;
+
+        }
         public async Task<SwapIt.Models.User> GetUserAsync(string id)
         {
             if (id == null)
@@ -288,6 +327,140 @@ namespace SwapIt.Repository.Admin
 
         }
 
+        public async Task<bool> DeleteSubCategoryAsync(List<string> ids)
+        {
+            if (ids.Count < 1)
+            {
+                return false;
+            }
+            var i = 0;
+            foreach (var id in ids)
+            {
+                try
+                {
+                    var catId = int.Parse(id);
+                    var subCategory = await _db.CategoryDepartments.FirstOrDefaultAsync(x => x.DepartmentId == catId);
+                    if (subCategory != null)
+                    {
+                        _db.CategoryDepartments.Remove(subCategory);
+                        i++;
 
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            if (i > 0)
+            {
+                await _db.SaveChangesAsync();
+            }
+            return true;
+        }
+
+        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        {
+            return await _db.Products.OrderByDescending(x => x.ProductId).ToListAsync();//.Include(x => x.DepartmentId)
+
+        }
+
+        public async Task<bool> AddProductAsync(string departmentId, string productName, string productDescription, string productPrice, string productQuantity)
+        {
+            var product = new Product
+            {
+                DepartmentId = int.Parse(departmentId),
+                ProductName = productName,
+                ProductDescription = productDescription,
+                ProductPrice = short.Parse(productPrice),
+                ProductQuantity = short.Parse(productQuantity),
+            };
+            _db.Products.Add(product);
+            await _db.SaveChangesAsync();
+
+            return true;
+        }
+
+
+
+        public async Task<bool> EditProductAsync(Product product)
+        {
+            var mov = await _db.Products.FirstOrDefaultAsync(x => x.ProductId == product.ProductId);
+            if (mov == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                _db.Attach(mov);
+                mov.ProductName = product.ProductName;
+                mov.ProductDescription=product.ProductDescription;
+                mov.ProductPrice=product.ProductPrice;
+                mov.ProductQuantity = product.ProductQuantity;
+                mov.DepartmentId = product.DepartmentId;
+
+                _db.Entry(mov).Property(x => x.ProductName).IsModified = true;
+                _db.Entry(mov).Property(x => x.ProductDescription).IsModified = true;
+                _db.Entry(mov).Property(x => x.ProductPrice).IsModified = true;
+                _db.Entry(mov).Property(x => x.ProductQuantity).IsModified = true;
+                _db.Entry(mov).Property(x => x.DepartmentId).IsModified = true;
+
+                
+
+                await _db.SaveChangesAsync();
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<Product> GetProductAsync(long id)
+        {
+            return await _db.Products.Include(x => x.DepartmentId).FirstOrDefaultAsync(x => x.ProductId == id);
+        }
+
+        public async Task<IEnumerable<Product>> SearchProductsAsync(string search)
+        {
+            return await _db.Products.OrderByDescending(x => x.ProductId).Include(x => x.DepartmentId)
+                .Where(x => x.ProductName.ToLower().Contains(search.ToLower()))// || x.SubCategory.SubCategoryName.ToLower().Contains(search.ToLower()))
+                .ToListAsync();
+        }
+
+
+        public async Task<bool> DeleteProductsAsync(List<string> ids)
+        {
+            if (ids.Count < 1)
+            {
+                return false;
+            }
+
+            int i = 0;
+            foreach (var id in ids)
+            {
+                try
+                {
+                    var productId = int.Parse(id);
+                    var product = await _db.Products.FirstOrDefaultAsync(x => x.ProductId == productId);
+                    if (product != null)
+                    {
+                        _db.Products.Remove(product);
+                        i++;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            if (i > 0)
+            {
+                await _db.SaveChangesAsync();
+            }
+            return true;
+        }
     }
 }

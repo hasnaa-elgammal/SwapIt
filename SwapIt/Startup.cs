@@ -38,10 +38,10 @@ namespace SwapIt
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddDbContext<ApplicationDB>(options => 
-            options.UseSqlServer(Configuration.GetConnectionString("Hasnaa")));
+            options.UseSqlServer(Configuration.GetConnectionString("Sara")));
 
             services.AddIdentity<User, Role>(options =>
             {

@@ -23,8 +23,19 @@ namespace SwapIt.Repository.Admin
         Task<Category> AddCategoryAsync(Category model);
         Task<Category> EditCategoryAsync(Category model);
         Task<bool> DeleteCategoriesAsync(List<string> ids);
-
+        Task<IEnumerable<CategoryDepartment>> GetSubCategoriesAsync();
+        Task<CategoryDepartment> AddSubCategoryAsync(CategoryDepartment categoryDepartment);
+        Task<CategoryDepartment> EditSubCategoryAsync(CategoryDepartment categoryDepartment);
+        Task<bool> DeleteSubCategoryAsync(List<String> ids);
         Task<IEnumerable<Product>> GetProducts();
+        Task<IEnumerable<Product>> GetAllProductsAsync();
+
+        Task<bool> AddProductAsync(String departmentId, String productName, String productDescription, String productPrice, String productQuantity);
+
+        Task<bool> DeleteProductsAsync(List<string> ids);
+        Task<bool> EditProductAsync(Product product);
+        Task<Product> GetProductAsync(long id);
+        Task<IEnumerable<Product>> SearchProductsAsync(string search);
 
     }
 }

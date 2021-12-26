@@ -201,5 +201,190 @@ namespace SwapIt.Controllers
             }
             return BadRequest();
         }
+
+
+        [Route("GetSubCategories")]
+        [HttpGet]
+        public async Task<IEnumerable<CategoryDepartment>> GetSubCategories()
+        {
+            return await _repo.GetSubCategoriesAsync();
+        }
+
+        [Route("AddSubCategory")]
+        [HttpPost]
+        public async Task<IActionResult> AddSubCategory(CategoryDepartment model)
+        {
+            if (model == null)
+            {
+                return BadRequest();
+            }
+            var cat = await _repo.AddSubCategoryAsync(model);
+            if (cat != null)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+
+        [Route("EditSubCategory")]
+        [HttpPut]
+        public async Task<IActionResult> EditSubCategory(CategoryDepartment model)
+        {
+            if (model == null)
+            {
+                return BadRequest();
+            }
+            var cat = await _repo.EditSubCategoryAsync(model);
+            if (cat != null)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+
+        [Route("DeleteSubCategory")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteSubCategory(List<string> ids)
+        {
+            if (ids.Count < 1)
+            {
+                return BadRequest();
+            }
+            var result = await _repo.DeleteSubCategoryAsync(ids);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [Route("GetAllProducts")]
+        [HttpGet]
+        public async Task<IEnumerable<Product>> GetAllProducts()
+        {
+
+            var products = await _repo.GetAllProductsAsync();
+            
+            if(products!=null)
+            {
+               return products;
+            }
+           return null;
+        }
+
+
+        [Route("AddProduct")]
+        [HttpPost]
+        public async Task<IActionResult> AddProduct()
+        {
+
+            var departmentId = HttpContext.Request.Form["departmentId"].ToString();
+            var productName = HttpContext.Request.Form["productName"].ToString();
+            var productDescription = HttpContext.Request.Form["productDescription"].ToString();
+            var productPrice = HttpContext.Request.Form["productPrice"].ToString();
+            var productQuantity = HttpContext.Request.Form["productQuantity"].ToString();
+
+
+
+            if (!string.IsNullOrEmpty(departmentId)&& 
+                !string.IsNullOrEmpty(productName) &&
+                !string.IsNullOrEmpty(productDescription) &&
+                !string.IsNullOrEmpty(productPrice) &&
+                !string.IsNullOrEmpty(productQuantity))
+            {
+                var result = await _repo.AddProductAsync(departmentId, productName, productDescription, productPrice, productQuantity);
+                if (result)
+                {
+                    return Ok();
+                }
+            }
+            return BadRequest();
+        }
+
+
+
+        [Route("GetProduct/{id}")]
+        [HttpGet]
+        public async Task<ActionResult<Product>> GetProduct(long id)
+        {
+            if (id > 0)
+            {
+                var movie = await _repo.GetProductAsync(id);
+                if (movie != null)
+                {
+                    return movie;
+                }
+            }
+            return BadRequest();
+        }
+
+        [Route("EditProduct")]
+        [HttpPut]
+        public async Task<IActionResult> EditProduct()
+        {
+            var departmentId = HttpContext.Request.Form["departmentId"].ToString();
+            var productName = HttpContext.Request.Form["productName"].ToString();
+            var productDescription = HttpContext.Request.Form["productDescription"].ToString();
+            var productPrice = HttpContext.Request.Form["productPrice"].ToString();
+            var productQuantity = HttpContext.Request.Form["productQuantity"].ToString();
+
+
+            if (!string.IsNullOrEmpty(departmentId) &&
+                !string.IsNullOrEmpty(productName) &&
+                !string.IsNullOrEmpty(productDescription) &&
+                !string.IsNullOrEmpty(productPrice) &&
+                !string.IsNullOrEmpty(productQuantity))
+            {
+                var product = new Product
+                {
+                    DepartmentId=int.Parse(departmentId),
+                    ProductName = productName,
+                    ProductDescription = productDescription,
+                    ProductPrice = short.Parse(productPrice),
+                    ProductQuantity = short.Parse(productQuantity),
+                };
+                var result = await _repo.EditProductAsync(product);
+                if (result)
+                {
+                    return Ok();
+                }
+            }
+
+            return BadRequest();
+        }
+
+
+        [Route("SearchProducts/{search}")]
+        [HttpGet]
+        public async Task<IEnumerable<Product>> GetProduct(string search)
+        {
+            if (search == null || string.IsNullOrEmpty(search))
+            {
+                return null;
+            }
+
+            return await _repo.SearchProductsAsync(search);
+        }
+
+        [Route("DeleteAllProducts")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteAllProducts(List<string> ids)
+        {
+            if (ids.Count < 1)
+            {
+                return BadRequest();
+            }
+
+            var result = await _repo.DeleteProductsAsync(ids);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
     }
 }
+
