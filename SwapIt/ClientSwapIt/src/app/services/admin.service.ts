@@ -5,7 +5,9 @@ import { EditUserRoleComponent } from '../accounts/admin/edit-user-role/edit-use
 import { Category } from '../models/CategoryModel';
 import { EditUserModel } from '../models/EditUserModel';
 import { EditUserRoleModel } from '../models/EditUserRoleModel';
+import { ProductModel } from '../models/ProductModel';
 import { RoleModel } from '../models/RoleModel';
+import { SubCategory } from '../models/SubCategory';
 import { UserModel } from '../models/UserModel';
 import { UserRoleModel } from '../models/UserRoleModel';
 import { Users } from '../models/users.model';
@@ -70,5 +72,41 @@ export class AdminService {
   DeleteAllCategory(ids:string[]){
     return this.http.post(this.baseUrl+'DeleteCategory',ids,this.headers).pipe();
   }
+  
 
+  GetAllSubCategories(): Observable<SubCategory[]> {
+    return this.http.get<SubCategory[]>(this.baseUrl + 'GetSubCategories',this.headers).pipe();
+  }
+  AddSubCategory(model:SubCategory): Observable<SubCategory> {
+    return this.http.post<SubCategory>(this.baseUrl + 'AddSubCategory',model,this.headers).pipe();
+  }
+
+  EditSubCategory(model:SubCategory): Observable<SubCategory> {
+    return this.http.put<SubCategory>(this.baseUrl + 'EditSubCategory',model,this.headers).pipe();
+  }
+
+  DeleteAllSubCategory(ids:string[]){
+    return this.http.post(this.baseUrl+'DeleteSubCategory',ids,this.headers).pipe();
+  }
+  GetAllProducts(): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(this.baseUrl + 'GetAllProducts',this.headers).pipe();
+  }
+
+  AddProduct(fd:FormData){
+    return this.http.post(this.baseUrl+'AddProduct',fd, {withCredentials:true}).pipe();
+  }
+  
+  GetProduct(id:number):Observable<ProductModel>{
+    return this.http.get<ProductModel>(this.baseUrl+'GetProduct/'+id,this.headers).pipe();
+  }
+
+  EditProduct(fd:FormData){
+    return this.http.put(this.baseUrl+'EditProduct',fd,{withCredentials:true}).pipe();
+  }
+  DeleteAllProducts(ids:string[]){
+    return this.http.post(this.baseUrl+'DeleteAllProducts',ids,this.headers).pipe();
+  }
+  SearchProducts(search:string):Observable<ProductModel[]>{
+    return this.http.get<ProductModel[]>(this.baseUrl+'SearchProducts/'+search,this.headers).pipe();
+  }
 }

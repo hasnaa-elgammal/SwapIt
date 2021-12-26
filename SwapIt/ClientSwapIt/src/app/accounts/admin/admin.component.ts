@@ -12,6 +12,8 @@ export class AdminComponent implements OnInit {
   isAddUser:boolean;
   isUserRoleList:boolean;
   isCategoryList:boolean;
+  isSubCategoryList:boolean;
+  isProductList:boolean;
 
   ngOnInit(): void {
 
@@ -19,6 +21,8 @@ export class AdminComponent implements OnInit {
     this.isUserRoleList=false;
     this.isAddUser=false;
     this.isCategoryList=false;
+    this.isSubCategoryList=false;
+    this.isProductList=false;
     $(document).ready(function () {
       $('#sidebarCollapse').on('click', function () {
           $('#sidebar').toggleClass('active');
@@ -33,31 +37,63 @@ export class AdminComponent implements OnInit {
     this.GetCategoryList();
     sessionStorage.removeItem("cat");
   }
+  if(sessionStorage.getItem("subcat")){
+    this.GetSubCategoryList();
+    sessionStorage.removeItem("subcat");
+  }
+  if(sessionStorage.getItem("product")){
+    this.GetProductList();
+    sessionStorage.removeItem("product");
+  }
   }
 
   CheckUser():boolean{
     this.isAddUser=false;
     this.isUserRoleList=false;
     this.isCategoryList=false;
+    this.isSubCategoryList=false;
+    this.isProductList=false;
     return this.isUserList=true;
   }
   AddUser(){
     this.isUserList=false;
     this.isUserRoleList=false;
     this.isCategoryList=false;
+    this.isSubCategoryList=false;
+    this.isProductList=false;
     return this.isAddUser=true;
   }
   CheckUserRoleList():boolean{
     this.isUserList=false;
     this.isAddUser=false;
     this.isCategoryList=false;
+    this.isSubCategoryList=false;
+    this.isProductList=false;
     return this.isUserRoleList=true;
   }
   GetCategoryList(){
     this.isUserList=false;
     this.isAddUser=false;
     this.isUserRoleList=false;
+    this.isSubCategoryList=false;
+    this.isProductList=false;
     return this.isCategoryList=true;
+  }
+  GetSubCategoryList(){
+    this.isCategoryList=false;
+    this.isUserList=false;
+    this.isAddUser=false;
+    this.isUserRoleList=false;
+    this.isProductList=false;
+    return this.isSubCategoryList=true;
+  }
+  GetProductList(){
+    this.isCategoryList=false;
+    this.isUserList=false;
+    this.isAddUser=false;
+    this.isUserRoleList=false;
+    this.isSubCategoryList=false;
+    return this.isProductList=true;
   }
   
 }

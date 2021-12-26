@@ -9,6 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Users } from 'src/app/models/users.model';
 import { CryptService } from 'src/app/services/crypt.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AdminService } from 'src/app/services/admin.service';
+import { ProductModel } from 'src/app/models/ProductModel';
 
 @Component({
   selector: 'app-nav',
@@ -27,12 +30,23 @@ export class NavComponent implements OnInit {
 
   constructor(
     private service: RegisterService,
+    private serviceO:AdminService,
     private auth: AuthService,
     private route: Router,
     private crypt: CryptService,
+    private fb:FormBuilder,
+    
   ) { }
 
+  formSearch:FormGroup;
+
+  products:ProductModel[];
   ngOnInit(): void {
+
+    this.formSearch=this.fb.group({
+      search:['',Validators.required]
+    })
+
     if(this.isUserIn()){
       if(this.auth.IsExpiredDate(this.auth.expire) === true){
         this.logout();
@@ -77,6 +91,24 @@ export class NavComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  getProducts(){
+    this.serviceO.GetAllProducts().subscribe(list=>{
+      this.products=list;
+      console.log(list);
+    },ex=>console.log(ex));
+  }
+  onSearch(){
+    if(this.formSearch.valid){
+      const search=this.formSearch.value.search;
+      this.serviceO.SearchProducts(search).subscribe(list=>{
+        this.products=list;
+      },ex=>{
+        console.log(ex);
+      })
+    }
+
   }
 
 }

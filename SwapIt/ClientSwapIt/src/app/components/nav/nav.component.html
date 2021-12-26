@@ -24,14 +24,15 @@
         
         
       </ul>
-      <form class="d-flex">
+      <!-- [FormGroup]="formSearch" -->
+      <form class="d-flex"  (ngSubmit)="onSearch()">
           <div class="one">
-          <button class="btn " type="submit">
+          <button class="btn " type="submit"[disabled]="formSearch.invalid">
               <fa-icon [icon]="faSearch"></fa-icon>
           </button>
           </div>
           <div class="two">
-              <input class="form-control me-2" type="search" placeholder="Search...." aria-label="Search">
+              <input class="form-control me-2" type="search" placeholder="Search...." aria-label="Search" formControlName="search">
           </div>
           
       </form>

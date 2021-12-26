@@ -1,3 +1,4 @@
+import { SubCategory } from "./SubCategory";
 
 export class ProductModel {
     productId: number
@@ -10,4 +11,5 @@ export class ProductModel {
     productDescription: string;
     forswap: boolean;
     forsell: boolean;
+    subCategory:SubCategory;
 }

@@ -41,6 +41,12 @@ import { AddCategoryComponent } from './accounts/admin/Categories/add-category/a
 import { ProductComponent } from './accounts/profile/products/product/product.component';
 import { ForgotpasswordComponent } from './accounts/forgotpassword/forgotpassword.component';
 import { ForgotresetpassComponent } from './accounts/forgotresetpass/forgotresetpass.component';
+import { EditCategoryComponent } from './accounts/admin/Categories/edit-category/edit-category.component';
+import { SubCategoryComponent } from './accounts/admin/SubCategories/sub-category/sub-category.component';
+import { SubCategoryListComponent } from './accounts/admin/SubCategories/sub-category-list/sub-category-list.component';
+import { ProductListComponent } from './accounts/admin/Products/product-list/product-list.component';
+import { AddProductComponent } from './accounts/admin/Products/add-product/add-product.component';
+import { EditproductComponent } from './accounts/admin/Products/editproduct/editproduct.component';
 
 
 @NgModule({
@@ -78,6 +84,12 @@ import { ForgotresetpassComponent } from './accounts/forgotresetpass/forgotreset
     ProductComponent,
     ForgotpasswordComponent,
     ForgotresetpassComponent,
+    EditCategoryComponent,
+    SubCategoryComponent,
+    SubCategoryListComponent,
+    ProductListComponent,
+    AddProductComponent,
+    EditproductComponent,
     
     
     

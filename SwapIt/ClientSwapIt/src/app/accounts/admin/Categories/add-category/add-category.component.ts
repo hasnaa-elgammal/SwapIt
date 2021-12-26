@@ -29,7 +29,7 @@ export class AddCategoryComponent implements OnInit {
   ngOnInit(): void {
 
     this.category={
-      id:0,
+      categoryId:0,
       categoryName:'',
       categoryImage: ''
     }
@@ -60,7 +60,7 @@ export class AddCategoryComponent implements OnInit {
     if(name){
       if(this.id>0){
 
-      this.category.id=this.id;
+      this.category.categoryId=this.id;
       this.category.categoryName=name;
       this.service.EditCategory(this.category).subscribe(cat=>{
         this.GoToList();
@@ -72,7 +72,7 @@ export class AddCategoryComponent implements OnInit {
       })
         
       }else{
-      this.category.id=0;
+      this.category.categoryId=0;
       this.category.categoryName=name;
       this.service.AddCategory(this.category).subscribe(cat=>{
         this.message='Category is Added Successfully';

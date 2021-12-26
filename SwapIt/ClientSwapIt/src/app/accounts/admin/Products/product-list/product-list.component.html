@@ -1,12 +1,14 @@
 <div class="user-role">
     <div class="alert alert-primary mb-3" role="alert">
-        <strong>Main Categories</strong>
+        <strong>Products List</strong>
     </div>
-    <button type="button" class="btn btn-outline-success mb-3"(click)="AddCategory()">Add Category</button>
+    <button type="button" class="btn btn-outline-success mb-3"(click)="AddProduct()">Add Product</button>
     <table class="table table-light rounded mb-3">
         <thead>
             <tr class="bg-dark text-light">
-                <th>Category's Name</th>
+                <th>Products's Name</th>
+                <th>Description</th>
+                <th> Price</th>
                 <th></th>
                 <th>
                     <input id="first" type="checkbox" class="ckheader" (change)="SelectAll()" >
@@ -14,15 +16,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of categories">
+            <tr *ngFor="let item of products">
                 <td scope="row">
-                    {{item.categoryName}}
-                </td>
-                <td> 
-                    <button type="button" class="btn btn-primary btn-sm"(click)="EditCategory(item.categoryId,item.categoryName)">Edit</button>
+                    {{item.productName}}
                 </td>
                 <td>
-                    <input type="checkbox" class="ckitem" id="ckitem" value="{{item.categoryId}}">
+                    {{item.productDescription}}
+                </td>
+                <td>
+                    {{item.productPrice}}
+                </td>
+                <td> 
+                    <button type="button" class="btn btn-primary btn-sm"(click)="EditProduct(item.productId)">Edit</button>
+                </td>
+                <td>
+                    <input type="checkbox" class="ckitem" id="ckitem" value="{{item.productId}}">
                 </td>
             </tr>
         </tbody>
@@ -51,3 +59,4 @@
         </div>
     </div>
 </div>
+
