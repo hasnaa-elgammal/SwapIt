@@ -41,7 +41,7 @@ namespace SwapIt
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddDbContext<ApplicationDB>(options => 
-            options.UseSqlServer(Configuration.GetConnectionString("Sara")));
+            options.UseSqlServer(Configuration.GetConnectionString("Hasnaa")));
 
             services.AddIdentity<User, Role>(options =>
             {

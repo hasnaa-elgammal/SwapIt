@@ -47,6 +47,7 @@ import { SubCategoryListComponent } from './accounts/admin/SubCategories/sub-cat
 import { ProductListComponent } from './accounts/admin/Products/product-list/product-list.component';
 import { AddProductComponent } from './accounts/admin/Products/add-product/add-product.component';
 import { EditproductComponent } from './accounts/admin/Products/editproduct/editproduct.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 
 @NgModule({
@@ -102,7 +103,8 @@ import { EditproductComponent } from './accounts/admin/Products/editproduct/edit
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgImageSliderModule
    
 
    
