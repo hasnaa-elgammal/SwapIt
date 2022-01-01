@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../categories/interfaces/product.interface';
 import { AddProductModel } from '../models/AddProductModel';
 import { Department } from '../models/DepartmentModel';
+import { ProductFinalModel } from '../models/ProductFinalModel';
 import { ProductModel } from '../models/ProductModel';
 
 @Injectable({
@@ -32,6 +33,10 @@ export class UserService {
   GetAllDepartments(): Observable<Department[]> {
     return this.http.get<Department[]>(this.baseUrl + 'GetAllDepartments').pipe();
   }
+
+  // Added
+
+  
 
   
 }

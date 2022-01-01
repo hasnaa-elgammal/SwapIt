@@ -8,6 +8,8 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import{faStar} from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 import { Users } from 'src/app/models/users.model';
+import { AdminService } from 'src/app/services/admin.service';
+import { ProductFinalModel } from 'src/app/models/ProductFinalModel';
 
 
 
@@ -27,23 +29,25 @@ export class ProfileComponent implements OnInit {
   faHeart= faHeart;
   faCartPlus=faCartPlus;
   faStar=faStar;
+  products : ProductFinalModel[];
   
 
-  products: Product[] = [
+  // products: Product[] = [
     
-    {category:'Bages',photo:'assets/bag.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
-    {category:'Books',photo:'assets/book.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
-    {category:'Clothes',photo:'assets/clothes.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
-    {category:'Clothes',photo:'assets/clothes2.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
+  //   {category:'Bages',photo:'assets/bag.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
+  //   {category:'Books',photo:'assets/book.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
+  //   {category:'Clothes',photo:'assets/clothes.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
+  //   {category:'Clothes',photo:'assets/clothes2.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
 
-    {category:'Furniture',photo:'assets/furniture.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
+  //   {category:'Furniture',photo:'assets/furniture.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
 
 
-  ];
+  // ];
 
   constructor(
     private _activatedRoute: ActivatedRoute,
     public auth: AuthService,
+    private serviceAdmin: AdminService
     
     ) {
     _activatedRoute.params.subscribe(params =>
@@ -52,7 +56,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = new Users();
-    this.GetProfile()
+    this.GetProfileProductsByEmail();
+    this.GetProfile();
+    
   }
 
   toggleSettings(){
@@ -79,6 +85,36 @@ export class ProfileComponent implements OnInit {
       return 'assets/images/users/' + this.user.userImage
     }
   }
+
+  GetProfileProductsByEmail(){
+    this.serviceAdmin.GetProfileProductsByEmail(this.auth.email).subscribe((list)=>{
+      this.products = list;
+    },ex=>console.log(ex));
+  }
+  
+  SetImageProduct(pro : ProductFinalModel){
+    if(pro.productImage==null || pro.productImage == "null" || pro.productImage == "Null" || pro.productImage == "NULL"){
+      return "assets/images/products/def.jpg"
+    }else{
+      return 'assets/images/products/' + pro.productImage
+    }
+  }
+  AddToCart(product: ProductFinalModel){
+    product.e = this.auth.email;
+    this.serviceAdmin.AddToCart(product).subscribe(p=>{
+    },ex=>console.log(ex));
+  }
+  AddToFav(product: ProductFinalModel){
+    product.e = this.auth.email;
+    this.serviceAdmin.AddToFav(product).subscribe(p=>{
+    },ex=>console.log(ex));
+  }
+  RemoveProductFromAllFiles(productName: string){
+    this.serviceAdmin.RemoveProductFromAllFiles(productName).subscribe(x=>{
+    },ex=>console.log(ex));
+  }
+
+
 
 
 }

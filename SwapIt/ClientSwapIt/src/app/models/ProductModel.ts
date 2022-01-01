@@ -12,4 +12,5 @@ export class ProductModel {
     forswap: boolean;
     forsell: boolean;
     subCategory:SubCategory;
+    
 }

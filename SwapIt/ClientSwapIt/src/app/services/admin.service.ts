@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EditUserRoleComponent } from '../accounts/admin/edit-user-role/edit-user-role.component';
 import { Category } from '../models/CategoryModel';
+import { CategoryModelHome } from '../models/CategoryModelHome';
 import { EditUserModel } from '../models/EditUserModel';
 import { EditUserRoleModel } from '../models/EditUserRoleModel';
+import { ProductFinalModel } from '../models/ProductFinalModel';
 import { ProductModel } from '../models/ProductModel';
 import { RoleModel } from '../models/RoleModel';
 import { SubCategory } from '../models/SubCategory';
@@ -88,6 +90,7 @@ export class AdminService {
   DeleteAllSubCategory(ids:string[]){
     return this.http.post(this.baseUrl+'DeleteSubCategory',ids,this.headers).pipe();
   }
+  
   GetAllProducts(): Observable<ProductModel[]> {
     return this.http.get<ProductModel[]>(this.baseUrl + 'GetAllProducts',this.headers).pipe();
   }
@@ -109,4 +112,53 @@ export class AdminService {
   SearchProducts(search:string):Observable<ProductModel[]>{
     return this.http.get<ProductModel[]>(this.baseUrl+'SearchProducts/'+search,this.headers).pipe();
   }
+
+  // Added
+
+  // GetHomeProducts
+  GetHomeProducts(): Observable<ProductFinalModel[]> {
+    return this.http.get<ProductFinalModel[]>(this.baseUrl + 'GetHomeProducts').pipe();
+  }
+   // GetFavProductsByEmail
+   GetFavProductsByEmail(email:string):Observable<ProductFinalModel[]>{
+    return this.http.get<ProductFinalModel[]>(this.baseUrl+'GetFavProductsByEmail/'+email, this.headers).pipe();
+  }
+  // GetCartProductsByEmail
+  GetCartProductsByEmail(email:string):Observable<ProductFinalModel[]>{
+    return this.http.get<ProductFinalModel[]>(this.baseUrl+'GetCartProductsByEmail/'+email, this.headers).pipe();
+  }
+
+  // GetProfileProductsByEmail
+  GetProfileProductsByEmail(email:string):Observable<ProductFinalModel[]>{
+    return this.http.get<ProductFinalModel[]>(this.baseUrl+'GetProfileProductsByEmail/'+email, this.headers).pipe();
+  }
+  
+  GetHomeCategories(): Observable<CategoryModelHome[]> {
+    return this.http.get<CategoryModelHome[]>(this.baseUrl + 'GetHomeCategories',this.headers).pipe();
+  }
+
+  AddToCart(product: ProductFinalModel): Observable<ProductFinalModel> {
+    return this.http.post<ProductFinalModel>(this.baseUrl + 'AddToCart',product,this.headers).pipe();
+  }
+  AddToFav(product: ProductFinalModel): Observable<ProductFinalModel> {
+    return this.http.post<ProductFinalModel>(this.baseUrl + 'AddToFav',product,this.headers).pipe();
+  }
+
+  RemoveFromFav(id:number){
+    return this.http.get(this.baseUrl+'RemoveFromFav/'+id,this.headers).pipe();
+  }
+  RemoveFromCart(id:number){
+    return this.http.get(this.baseUrl+'RemoveFromCart/'+id,this.headers).pipe();
+  } 
+  RemoveProductFromAllFiles(productName:string){
+    return this.http.get(this.baseUrl+'RemoveProductFromAllFiles/'+productName,this.headers).pipe();
+  }
+
+  
+
+  
+
+  
+  
+  
 }

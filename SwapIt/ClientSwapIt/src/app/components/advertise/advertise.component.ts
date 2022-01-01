@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 import { AddProductModel } from 'src/app/models/AddProductModel';
 import { Department } from 'src/app/models/DepartmentModel';
+import { ProductFinalModel } from 'src/app/models/ProductFinalModel';
 import { ProductModel } from 'src/app/models/ProductModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -24,7 +25,7 @@ export class AdvertiseComponent implements OnInit {
   image: File;
   successMessage:string;
   productForm!: FormGroup;
-  product: AddProductModel;
+  product: ProductFinalModel;
   email = this.auth.email;
   departments:Department[];
   d: Department;
@@ -35,7 +36,7 @@ export class AdvertiseComponent implements OnInit {
     this.GetAllDepartments();
 
     this.product = {
-      userEmail: '',
+      email: '',
       departmentId: 0,
       productName: '',
       productPrice: 0,
@@ -43,7 +44,16 @@ export class AdvertiseComponent implements OnInit {
       productSize: '',
       productDescription: '',
       forswap: true,
-      forsell: true
+      forsell: true,
+      ownerFirstName: '',
+      ownerLastName: '',
+      sInCart: '',
+      sInFav: '',
+      sIsOwner: '',
+      productImage: '',
+      userId: '', 
+      productId: 0,
+      e: ''
     };
 
     this.productForm = this.fb.group({
@@ -70,7 +80,7 @@ export class AdvertiseComponent implements OnInit {
         formdata.append('productName', this.product.productName);
         formdata.append('productPrice', this.product.productPrice.toString());
         formdata.append('departmentId', this.product.departmentId.toString());
-        formdata.append('userEmail', this.product.userEmail);
+        formdata.append('email', this.product.email);
         formdata.append('productQuantity', this.product.productQuantity.toString());
         formdata.append('productDescription', this.product.productDescription);
         formdata.append('forsell', this.product.forsell.toString());
@@ -99,7 +109,7 @@ export class AdvertiseComponent implements OnInit {
     if(this.productForm.valid){
 
       this.product.departmentId = this.productForm.value.productDepartment;
-      this.product.userEmail = this.email;
+      this.product.email = this.email;
       this.product.productName = this.productForm.value.productName;
       this.product.productPrice = this.productForm.value.productPrice;
       this.product.productQuantity = this.productForm.value.productQuantity;

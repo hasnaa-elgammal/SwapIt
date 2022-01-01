@@ -37,5 +37,27 @@ namespace SwapIt.Repository.Admin
         Task<Product> GetProductAsync(long id);
         Task<IEnumerable<Product>> SearchProductsAsync(string search);
 
+        // Added
+
+        public Task<IEnumerable<Product>> GetHomeProducts();
+        Task<IEnumerable<Product>> GetProfileProductsByEmailAsync(string email);
+        Task<IEnumerable<Product>> GetFavProductsByEmailAsync(string email);
+        Task<IEnumerable<Product>> GetCartProductsByEmailAsync(string email);
+        Task<IEnumerable<Category>> GetCategoriesHomeAsync();
+        Task<bool> AddToCartAsync(Product product);
+        Task<bool> AddToFavAsync(Product product);
+        Task<Product> RemoveFromCartAsync(int id);
+        Task<Product> RemoveFromFavAsync(int id);
+        Task<Product> RemoveProductFromAllFilesAsync(string productName);
+
+
+
+
+
+
+
+
+
+
     }
 }

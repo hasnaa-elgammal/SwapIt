@@ -462,5 +462,170 @@ namespace SwapIt.Repository.Admin
             }
             return true;
         }
+
+
+        // Added
+
+        public async Task<IEnumerable<Product>> GetHomeProducts()
+        {
+            var products = await _db.Products.Where(x => x.SIsOwner == "true" || x.SIsOwner == "True").ToListAsync();
+            return products;
+
+        }
+
+        public async Task<IEnumerable<Product>> GetProfileProductsByEmailAsync(string email)
+        {
+            if (email == null)
+            {
+                return null;
+            }
+
+            var products = await _db.Products.Where(x => x.Email == email && (x.SIsOwner == "true" || x.SIsOwner == "True" )).ToListAsync();
+
+            if (products == null)
+            {
+                return null;
+            }
+            return products;
+        }
+
+        public async Task<IEnumerable<Product>> GetFavProductsByEmailAsync(string email)
+        {
+            if (email == null)
+            {
+                return null;
+            }
+            var products = await _db.Products.Where(x => x.E == email && (x.SInFav == "True"  || x.SInFav == "true")).ToListAsync();
+            if (products == null)
+            {
+                return null;
+            }
+            return products;
+        }
+        public async Task<IEnumerable<Product>> GetCartProductsByEmailAsync(string email)
+        {
+            if (email == null)
+            {
+                return null;
+            }
+            var products = await _db.Products.Where(x => x.E == email && (x.SInCart == "true" || x.SInCart == "True")).ToListAsync();
+            if (products == null)
+            {
+                return null;
+            }
+            return products;
+        }
+        public async Task<IEnumerable<Category>> GetCategoriesHomeAsync()
+        {
+            return await _db.Categories.ToListAsync();
+        }
+
+        public async Task<bool> AddToCartAsync(Product product)
+        {
+            Product p = new Product();
+            p.ProductName = product.ProductName;
+            p.ProductDescription = product.ProductDescription;
+            p.UserId = product.UserId;
+            p.DepartmentId = product.DepartmentId;
+            p.ProductPrice = product.ProductPrice;
+            p.ProductQuantity = product.ProductQuantity;
+            p.Email = product.Email;
+            p.E = product.E;
+            p.Forsell = product.Forsell;
+            p.Forswap = product.Forswap;
+            p.ProductSize = product.ProductSize;
+            p.OwnerFirstName = product.OwnerFirstName;
+            p.OwnerLastName = product.OwnerLastName;
+            p.ProductImage = product.ProductImage;
+            p.SIsOwner = "false";
+            p.SInCart = "true";
+            
+
+            var result = await _db.Products.AddAsync(p);
+            
+            _db.SaveChanges();
+
+            return true;
+
+        }
+
+        public async Task<bool> AddToFavAsync(Product product)
+        {
+            Product p = new Product();
+            p.ProductName = product.ProductName;
+            p.ProductDescription = product.ProductDescription;
+            p.UserId = product.UserId;
+            p.DepartmentId = product.DepartmentId;
+            p.ProductPrice = product.ProductPrice;
+            p.ProductQuantity = product.ProductQuantity;
+            p.Email = product.Email;
+            p.E = product.E;
+            p.Forsell = product.Forsell;
+            p.Forswap = product.Forswap;
+            p.ProductSize = product.ProductSize;
+            p.OwnerFirstName = product.OwnerFirstName;
+            p.OwnerLastName = product.OwnerLastName;
+            p.ProductImage = product.ProductImage;
+            p.SIsOwner = "false";
+            p.SInFav = "true";
+
+
+            var result = await _db.Products.AddAsync(p);
+
+            _db.SaveChanges();
+
+            return true;
+
+        }
+
+        public async Task<Product> RemoveFromCartAsync(int id)
+        {
+            var toRemove = await _db.Products.FirstOrDefaultAsync(x => x.ProductId == id);
+            
+            if (toRemove != null)
+            {
+                int idToRemove = toRemove.ProductId;
+                _db.Products.Remove(toRemove);
+                _db.SaveChanges();
+
+            }
+            return toRemove;
+        }
+
+        public async Task<Product> RemoveFromFavAsync(int id)
+        {
+            var toRemove = await _db.Products.FirstOrDefaultAsync(x => x.ProductId == id);
+
+            if (toRemove != null)
+            {
+                _db.Products.Remove(toRemove);
+                _db.SaveChanges();
+
+            }
+            return toRemove;
+        }
+        public async Task<Product> RemoveProductFromAllFilesAsync(string productName)
+        {
+            var productsToRemove = await _db.Products.Where(x => x.ProductName == productName).ToListAsync();
+            if (productsToRemove != null)
+            {
+                for (int i = 0; i < productsToRemove.Count; ++i)
+                {
+                    var p = await _db.Products.FirstOrDefaultAsync(x => x.ProductName == productName);
+                    _db.Products.Remove(p);
+                    _db.SaveChanges();
+                }
+            }
+
+            return null;
+        }
+
+
+
+
+
+
+
+
     }
 }

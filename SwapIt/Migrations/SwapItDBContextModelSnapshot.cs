@@ -327,6 +327,12 @@ namespace SwapIt.Migrations
                         .HasColumnType("int")
                         .HasColumnName("department_id");
 
+                    b.Property<string>("E")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool?>("Forsell")
                         .HasColumnType("bit")
                         .HasColumnName("forsell");
@@ -335,9 +341,18 @@ namespace SwapIt.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("forswap");
 
+                    b.Property<string>("OwnerFirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OwnerLastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ProductDescription")
                         .HasColumnType("text")
                         .HasColumnName("product_description");
+
+                    b.Property<string>("ProductImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -359,6 +374,15 @@ namespace SwapIt.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(30)")
                         .HasColumnName("product_size");
+
+                    b.Property<string>("SInCart")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SInFav")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SIsOwner")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)")

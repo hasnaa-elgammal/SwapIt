@@ -51,7 +51,7 @@ namespace SwapIt.Controllers
             var productName = HttpContext.Request.Form["productName"].FirstOrDefault();
             var productPrice = short.Parse(HttpContext.Request.Form["productPrice"].FirstOrDefault());
             var departmentId = int.Parse(HttpContext.Request.Form["departmentId"].FirstOrDefault());
-            var userEmail = HttpContext.Request.Form["userEmail"].FirstOrDefault();
+            var userEmail = HttpContext.Request.Form["email"].FirstOrDefault();
             var productQuantity = short.Parse(HttpContext.Request.Form["productQuantity"].FirstOrDefault());
             var productDescription = HttpContext.Request.Form["productDescription"].FirstOrDefault();
             var forsell = bool.Parse(HttpContext.Request.Form["forsell"].FirstOrDefault());
@@ -68,7 +68,7 @@ namespace SwapIt.Controllers
                     if (image != null && image.Length > 0)
                     {
                         var newfilename = DateTime.Now.ToString("yyMMddhhmmss") + image.FileName;
-                        var filepath = Path.Combine(@"C:\Users\hasna\OneDrive\Desktop\FCI\SwapIt\SwapIt\ClientSwapIt\src\assets\images\products", newfilename);
+                        var filepath = Path.Combine(@"D:\FinalEdit\SwapIt\SwapIt\ClientSwapIt\src\assets\images\products", newfilename);
                         using (FileStream f = new FileStream(filepath, FileMode.Create))
                         {
                             await image.CopyToAsync(f);
@@ -87,6 +87,14 @@ namespace SwapIt.Controllers
                     p.DepartmentId = departmentId;
                     p.Forsell = forsell;
                     p.Forswap = forswap;
+                    p.SInCart = "false";
+                    p.SInFav = "false";
+                    p.OwnerFirstName = user.FirstName;
+                    p.OwnerLastName = user.LastName;
+                    p.Email = user.Email;
+                    p.SIsOwner = "true";
+                    p.ProductImage = p.ProductSize;
+
 
                     var result = await _db.Products.AddAsync(p);
                     _db.SaveChanges();
@@ -102,5 +110,12 @@ namespace SwapIt.Controllers
         {
             return await _db.CategoryDepartments.ToListAsync();
         }
+
+        // Added
+
+        
+
+        
+
     }
 }

@@ -26,6 +26,16 @@ namespace SwapIt.Models
         public string ProductDescription { get; set; }
         public bool? Forswap { get; set; }
         public bool? Forsell { get; set; }
+        // Added
+        public string OwnerFirstName { get; set; }
+        public string OwnerLastName { get; set; }
+        public string SInCart { get; set; }
+        public string SInFav { get; set; }
+        public string SIsOwner { get; set; }
+        public string Email { get; set; }
+        public string ProductImage { get; set; }
+        public string E { get; set; }
+
 
         public virtual CategoryDepartment Department { get; set; }
         public virtual User User { get; set; }

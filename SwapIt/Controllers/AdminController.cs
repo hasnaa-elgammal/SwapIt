@@ -385,6 +385,158 @@ namespace SwapIt.Controllers
             return BadRequest();
         }
 
+
+        // Added
+
+        [Route("GetHomeProducts")]
+        [HttpGet]
+        public async Task<IEnumerable<Product>> GetHomeProducts()
+        {
+            var products = await _repo.GetHomeProducts();
+            if (products == null)
+            {
+                return null;
+            }
+            return products;
+
+        }
+
+        [Route("GetProfileProductsByEmail/{email}")]
+        [HttpGet]
+        public async Task<IEnumerable<Product>> GetProfileProductsByEmail(string email)
+        {
+            if (email == null)
+            {
+                return null;
+            }
+            var products = await _repo.GetProfileProductsByEmailAsync(email);
+            if (products != null)
+            {
+                return products;
+            }
+            return null;
+        }
+
+        [Route("GetFavProductsByEmail/{email}")]
+        [HttpGet]
+        public async Task<IEnumerable<Product>> GetFavProductsByEmail(string email)
+        {
+            if (email == null)
+            {
+                return null;
+            }
+            var products = await _repo.GetFavProductsByEmailAsync(email);
+            if (products != null)
+            {
+                return products;
+            }
+            return null;
+        }
+
+        [Route("GetCartProductsByEmail/{email}")]
+        [HttpGet]
+        public async Task<IEnumerable<Product>> GetCartProductsByEmail(string email)
+        {
+            if (email == null)
+            {
+                return null;
+            }
+            var products = await _repo.GetCartProductsByEmailAsync(email);
+            if (products != null)
+            {
+                return products;
+            }
+            return null;
+        }
+
+        [Route("GetHomeCategories")]
+        [HttpGet]
+        public async Task<IEnumerable<Category>> GetHomeCategories()
+        {
+            var categories = await _repo.GetCategoriesHomeAsync();
+            if (categories == null)
+            {
+                return null;
+            }
+            return categories;
+
+        }
+
+        [Route("AddToCart")]
+        [HttpPost]
+        public async Task<bool> AddToCart(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                var p = await _repo.AddToCartAsync(product);
+                if (p != false)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        [Route("AddToFav")]
+        [HttpPost]
+        public async Task<bool> AddToFav(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                var p = await _repo.AddToFavAsync(product);
+                if (p != false)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        [Route("RemoveFromCart/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> DeleteProfile(int id)
+        {
+            var product = await _repo.RemoveFromCartAsync(id);
+            if (product != null)
+            {
+                return Ok();
+            }
+            return BadRequest();
+
+        }
+
+        [Route("RemoveFromFav/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> RemoveFromFav(int id)
+        {
+            var product = await _repo.RemoveFromFavAsync(id);
+            if (product != null)
+            {
+                return Ok();
+            }
+            return BadRequest();
+
+        }
+
+        [Route("RemoveProductFromAllFiles/{productName}")]
+        [HttpGet]
+        public async Task<IActionResult> RemoveProductFromAllFiles(string productName)
+        {
+            var product = await _repo.RemoveProductFromAllFilesAsync(productName);
+            if (product != null)
+            {
+                return Ok();
+            }
+            return BadRequest();
+
+        }
+
+
+
+
+
+
+
     }
 }
 
