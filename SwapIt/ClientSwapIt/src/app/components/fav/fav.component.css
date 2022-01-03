@@ -40,3 +40,8 @@ a{
      font-weight: bold;
      font-size: 14px;
    }
+
+.closespan {
+  font-size: 30px;
+  color: #343a40;
+}

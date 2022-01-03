@@ -250,7 +250,7 @@ namespace SwapIt.Controllers
                         //real path
                         //var filepath = Path.Combine(_host.WebRootPath + "/images/users", userimage.FileName);
                         var newfilename = useremail + DateTime.Now.ToString("yyyyMMddhhmmss") + userimage.FileName;
-                        var filepath = Path.Combine(@"C:\Users\EL-MAGD\Desktop\SwapIt_last\SwapIt\ClientSwapIt\src\assets\images\users", newfilename);
+                        var filepath = Path.Combine(@"C:\Users\hasna\OneDrive\Desktop\FCI\SwapIt\SwapIt\ClientSwapIt\src\assets\images\users", newfilename);
                         using (FileStream f = new FileStream(filepath, FileMode.Create))
                         {
                             await userimage.CopyToAsync(f);

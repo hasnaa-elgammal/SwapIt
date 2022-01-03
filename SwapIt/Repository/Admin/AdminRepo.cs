@@ -361,7 +361,7 @@ namespace SwapIt.Repository.Admin
 
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
-            return await _db.Products.OrderByDescending(x => x.ProductId).ToListAsync();//.Include(x => x.DepartmentId)
+            return await _db.Products.OrderByDescending(x => x.ProductId).Where(x => x.SIsOwner == "true" || x.SIsOwner == "True").ToListAsync();//.Include(x => x.DepartmentId)
 
         }
 
@@ -375,7 +375,12 @@ namespace SwapIt.Repository.Admin
                 ProductPrice = short.Parse(productPrice),
                 ProductQuantity = short.Parse(productQuantity),
                 ProductImage = "default_product.jpg",
-            };
+                SIsOwner = "true",
+                SInCart = "false",
+                SInFav = "false",
+                OwnerFirstName = "Admin"
+        };
+            product.CategoryId = await _db.CategoryDepartments.Where(x => x.DepartmentId == int.Parse(departmentId)).Select(x => x.CategoryId).FirstOrDefaultAsync();
             _db.Products.Add(product);
             await _db.SaveChangesAsync();
 
@@ -427,7 +432,7 @@ namespace SwapIt.Repository.Admin
         public async Task<IEnumerable<Product>> SearchProductsAsync(string search)
         {
             return await _db.Products.OrderByDescending(x => x.ProductId)//.Include(x => x.DepartmentId)
-                .Where(x => x.ProductName.ToLower().Contains(search.ToLower())).ToListAsync();
+                .Where(x => x.ProductName.ToLower().Contains(search.ToLower())).Where(x => x.SIsOwner == "true" || x.SIsOwner == "True").ToListAsync();
         }
 
 

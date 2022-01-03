@@ -69,7 +69,7 @@ namespace SwapIt.Controllers
                     if (image != null && image.Length > 0)
                     {
                         var newfilename = DateTime.Now.ToString("yyMMddhhmmss") + image.FileName;
-                        var filepath = Path.Combine(@"C:\Users\EL-MAGD\Desktop\SwapIt_last\SwapIt\ClientSwapIt\src\assets\images\products", newfilename);
+                        var filepath = Path.Combine(@"C:\Users\hasna\OneDrive\Desktop\FCI\SwapIt\SwapIt\ClientSwapIt\src\assets\images\products", newfilename);
                         using (FileStream f = new FileStream(filepath, FileMode.Create))
                         {
                             await image.CopyToAsync(f);

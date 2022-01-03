@@ -1,21 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\EL-MAGD\\Desktop\\SwapIt_last\\SwapIt\\SwapIt.csproj": {}
+    "C:\\Users\\hasna\\OneDrive\\Desktop\\FCI\\SwapIt\\SwapIt\\SwapIt.csproj": {}
   },
   "projects": {
-    "C:\\Users\\EL-MAGD\\Desktop\\SwapIt_last\\SwapIt\\SwapIt.csproj": {
+    "C:\\Users\\hasna\\OneDrive\\Desktop\\FCI\\SwapIt\\SwapIt\\SwapIt.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\EL-MAGD\\Desktop\\SwapIt_last\\SwapIt\\SwapIt.csproj",
+        "projectUniqueName": "C:\\Users\\hasna\\OneDrive\\Desktop\\FCI\\SwapIt\\SwapIt\\SwapIt.csproj",
         "projectName": "SwapIt",
-        "projectPath": "C:\\Users\\EL-MAGD\\Desktop\\SwapIt_last\\SwapIt\\SwapIt.csproj",
-        "packagesPath": "C:\\Users\\EL-MAGD\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\EL-MAGD\\Desktop\\SwapIt_last\\SwapIt\\obj\\",
+        "projectPath": "C:\\Users\\hasna\\OneDrive\\Desktop\\FCI\\SwapIt\\SwapIt\\SwapIt.csproj",
+        "packagesPath": "C:\\Users\\hasna\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hasna\\OneDrive\\Desktop\\FCI\\SwapIt\\SwapIt\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\EL-MAGD\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\hasna\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -26,7 +30,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +41,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -95,6 +97,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.2, 3.1.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -103,7 +111,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
