@@ -14,6 +14,8 @@ export class AdminComponent implements OnInit {
   isCategoryList:boolean;
   isSubCategoryList:boolean;
   isProductList:boolean;
+  isEditUser:boolean;
+  isContactList:boolean;
 
   ngOnInit(): void {
 
@@ -23,6 +25,10 @@ export class AdminComponent implements OnInit {
     this.isCategoryList=false;
     this.isSubCategoryList=false;
     this.isProductList=false;
+    this.isEditUser=false;
+    this.isContactList=false;
+    
+
     $(document).ready(function () {
       $('#sidebarCollapse').on('click', function () {
           $('#sidebar').toggleClass('active');
@@ -31,6 +37,11 @@ export class AdminComponent implements OnInit {
   if(sessionStorage.getItem("editUserRole")){
     this.CheckUserRoleList();
     sessionStorage.removeItem("editUserRole");
+  }
+
+  if(sessionStorage.getItem("edituser")){
+    this.EditUserList();
+    sessionStorage.removeItem("edituser");
   }
 
   if(sessionStorage.getItem("cat")){
@@ -53,6 +64,8 @@ export class AdminComponent implements OnInit {
     this.isCategoryList=false;
     this.isSubCategoryList=false;
     this.isProductList=false;
+    this.isEditUser=false;
+    this.isContactList=false;
     return this.isUserList=true;
   }
   AddUser(){
@@ -61,6 +74,8 @@ export class AdminComponent implements OnInit {
     this.isCategoryList=false;
     this.isSubCategoryList=false;
     this.isProductList=false;
+    this.isEditUser=false;
+    this.isContactList=false;
     return this.isAddUser=true;
   }
   CheckUserRoleList():boolean{
@@ -69,6 +84,8 @@ export class AdminComponent implements OnInit {
     this.isCategoryList=false;
     this.isSubCategoryList=false;
     this.isProductList=false;
+    this.isEditUser=false;
+    this.isContactList=false;
     return this.isUserRoleList=true;
   }
   GetCategoryList(){
@@ -77,6 +94,8 @@ export class AdminComponent implements OnInit {
     this.isUserRoleList=false;
     this.isSubCategoryList=false;
     this.isProductList=false;
+    this.isEditUser=false;
+    this.isContactList=false;
     return this.isCategoryList=true;
   }
   GetSubCategoryList(){
@@ -85,6 +104,8 @@ export class AdminComponent implements OnInit {
     this.isAddUser=false;
     this.isUserRoleList=false;
     this.isProductList=false;
+    this.isEditUser=false;
+    this.isContactList=false;
     return this.isSubCategoryList=true;
   }
   GetProductList(){
@@ -93,7 +114,29 @@ export class AdminComponent implements OnInit {
     this.isAddUser=false;
     this.isUserRoleList=false;
     this.isSubCategoryList=false;
+    this.isEditUser=false;
+    this.isContactList=false;
     return this.isProductList=true;
+  }
+  GetContactList(){
+    this.isCategoryList=false;
+    this.isUserList=false;
+    this.isAddUser=false;
+    this.isUserRoleList=false;
+    this.isSubCategoryList=false;
+    this.isEditUser=false;
+    this.isProductList=false;
+    return this.isContactList=true;
+  }
+  EditUserList(){
+    this.isAddUser=false;
+    this.isUserRoleList=false;
+    this.isCategoryList=false;
+    this.isSubCategoryList=false;
+    this.isProductList=false;
+    this.isUserList=false;
+    this.isContactList=false;
+    return this.isEditUser=true;
   }
   
 }

@@ -48,6 +48,8 @@ import { ProductListComponent } from './accounts/admin/Products/product-list/pro
 import { AddProductComponent } from './accounts/admin/Products/add-product/add-product.component';
 import { EditproductComponent } from './accounts/admin/Products/editproduct/editproduct.component';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { SearchComponent } from './components/search/search.component';
+import { ContactAdminComponent } from './accounts/admin/contact-admin/contact-admin.component';
 
 
 @NgModule({
@@ -91,6 +93,8 @@ import { NgImageSliderModule } from 'ng-image-slider';
     ProductListComponent,
     AddProductComponent,
     EditproductComponent,
+    SearchComponent,
+    ContactAdminComponent,
     
     
     

@@ -27,6 +27,7 @@ export class NavComponent implements OnInit {
   faHeart=faHeart;
   faCartPlus=faCartPlus;
   faUserCircle =faUserCircle 
+  logo='assets/logo.png'
 
   constructor(
     private service: RegisterService,
@@ -93,22 +94,28 @@ export class NavComponent implements OnInit {
     return false;
   }
 
-  getProducts(){
-    this.serviceO.GetAllProducts().subscribe(list=>{
-      this.products=list;
-      console.log(list);
-    },ex=>console.log(ex));
-  }
+  // getProducts(){
+  //   this.serviceO.GetAllProducts().subscribe(list=>{
+  //     this.products=list;
+  //     console.log(list);
+  //   },ex=>console.log(ex));
+  // }
+  // onSearch(){
+  //   if(this.formSearch.valid){
+  //     const search=this.formSearch.value.search;
+  //     this.serviceO.SearchProducts(search).subscribe(list=>{
+  //       this.products=list;
+  //     },ex=>{
+  //       console.log(ex);
+  //     })
+  //   }
+
+  // }
   onSearch(){
     if(this.formSearch.valid){
       const search=this.formSearch.value.search;
-      this.serviceO.SearchProducts(search).subscribe(list=>{
-        this.products=list;
-      },ex=>{
-        console.log(ex);
-      })
+      this.route.navigate(['/search', search]).then(x=>{window.location.reload();});
     }
-
   }
 
 }

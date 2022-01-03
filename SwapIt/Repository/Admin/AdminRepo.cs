@@ -374,6 +374,7 @@ namespace SwapIt.Repository.Admin
                 ProductDescription = productDescription,
                 ProductPrice = short.Parse(productPrice),
                 ProductQuantity = short.Parse(productQuantity),
+                ProductImage = "default_product.jpg",
             };
             _db.Products.Add(product);
             await _db.SaveChangesAsync();
@@ -425,9 +426,8 @@ namespace SwapIt.Repository.Admin
 
         public async Task<IEnumerable<Product>> SearchProductsAsync(string search)
         {
-            return await _db.Products.OrderByDescending(x => x.ProductId).Include(x => x.DepartmentId)
-                .Where(x => x.ProductName.ToLower().Contains(search.ToLower()))// || x.SubCategory.SubCategoryName.ToLower().Contains(search.ToLower()))
-                .ToListAsync();
+            return await _db.Products.OrderByDescending(x => x.ProductId)//.Include(x => x.DepartmentId)
+                .Where(x => x.ProductName.ToLower().Contains(search.ToLower())).ToListAsync();
         }
 
 
@@ -620,12 +620,47 @@ namespace SwapIt.Repository.Admin
             return null;
         }
 
+        public async Task<IEnumerable<Chat>> GetAllContactsAsync()
+        {
+            return await _db.Chats.OrderByDescending(x => x.MessageId).ToListAsync();//.Include(x => x.DepartmentId)
+        }
 
+        public async Task<IEnumerable<CategoryDepartment>> GetDepartmentsByIdAsync(int id)
+        {
 
+            var products = await _db.CategoryDepartments.Where(x => x.CategoryId == id).ToListAsync();
 
+            if (products == null)
+            {
+                return null;
+            }
+            return products;
+        }
+        public async Task<IEnumerable<Product>> GetHomeProductsByDepartmentIdAsync(int id)
+        {
+            var products = await _db.Products.Where(x => x.DepartmentId == id && (x.SIsOwner == "ture" || x.SIsOwner == "True")).ToListAsync();
 
+            if (products == null)
+            {
+                return null;
+            }
+            return products;
+        }
 
+        public async Task<IEnumerable<Product>> GetProfileProductsByEmailAsync(int idEncrypted)
+        {
+            int num = idEncrypted;
 
+            int depId = num % 1000000;
+            int catId = num / 1000000;
 
+            var products = await _db.Products.Where(x => x.CategoryId == catId && (x.SIsOwner == "ture" || x.SIsOwner == "True") && x.DepartmentId == depId).ToListAsync();
+
+            if (products == null)
+            {
+                return null;
+            }
+            return products;
+        }
     }
 }

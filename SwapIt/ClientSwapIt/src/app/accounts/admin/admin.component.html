@@ -34,6 +34,9 @@
             <li>
                 <a (click)="GetProductList()">Products List</a>
             </li>
+            <li>
+                <a (click)="GetContactList()">Contacts List</a>
+            </li>
             
         </ul>
 
@@ -92,6 +95,12 @@
             </div>
             <div *ngIf="isProductList">
                 <app-product-list></app-product-list>
+            </div>
+            <div *ngIf="isEditUser">
+                <app-edit-user></app-edit-user>
+            </div>
+            <div *ngIf="isContactList">
+                <app-contact-admin></app-contact-admin>
             </div>
 
         </div>

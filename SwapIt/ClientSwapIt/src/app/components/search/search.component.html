@@ -1,0 +1,87 @@
+<div class="container">    
+    <div class="row"  id="body">
+        <div class="col-md-3 " *ngFor="let product of products">
+            <div class="card" >
+                <img [src]="SetImageProduct(product)" class="card-img-top" height="200px">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{product.productName}}
+                    </h5>
+                    <p class="card-text">{{product.productDescription}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div >
+                        <p class="card-text"><small class="text-muted">BY:</small> {{product.ownerFirstName}} {{product.ownerLastName}}</p>
+                        </div>
+                    </li>
+                    <div>
+                    <li class="list-group-item">{{product.productPrice  | currency}}
+                        <span class="buttons">
+                        </span>
+                        <div class="card-body">
+                            <a class="card-link " (click)="AddToFav(product)"><fa-icon [icon]="faHeart"></fa-icon></a>
+                            <a  class="card-link" (click)="AddToCart(product)"><fa-icon [icon]="faCartPlus "></fa-icon></a>
+                        </div>
+                        </li>
+                    </div> 
+                    <a href="#" class="btn btn-dark " style="color:white;"(click)="open(content)">View More</a>
+              <ng-template #content let-modal>
+                <div class="modal-header">
+                  <button type="button" class="close " aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class=" ">
+                  <div class="col col-12 col-md-6 col-lg-3" >
+                    <div class="card" id="view">
+                      <img [src]="SetImageProduct(product)" class="card-img-top" height="200px">
+                      <div class="card-body">
+                      <h5 class="card-title">
+                          {{product.productName}}
+                      </h5>
+                      <p class="card-text">{{product.productDescription}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                              
+                        <div >
+                          <p class="card-text"><small class="text-muted">BY:</small> {{product.ownerFirstName}}{{product.ownerLastName}}</p>
+            
+                         </div>
+                     
+                    </li>
+                    <div>
+                      <li class="list-group-item">{{product.productPrice  | currency}}
+                        <!-- <button type="button" class="btn btn-dark">Swap</button> -->
+                        <div class="card-body">
+                            <a id="poplink" class="card-link " routerLink="/cart"><fa-icon [icon]="faCartPlus "></fa-icon></a>
+                            <a id="poplink" class="card-link" routerLink="/fav"><fa-icon [icon]="faHeart "></fa-icon></a>
+
+                     </div>
+                     <div class="card-body"></div>
+                    </li>
+                        </div>
+                      
+                      
+            
+                     
+                    </ul>
+                   
+                  </div>
+                </div>
+                 
+                </div>
+                <div class="modal-footer"> 
+                  <button type="button" class="  btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+                </div>
+              </ng-template>
+                </ul>
+            </div>
+        </div>
+        <div class="alert alert-danger col-12" role="alert" *ngIf="this.products.length <1">
+            <span class="blackspan">No Products Found</span>
+        </div>
+    </div>
+</div>
+

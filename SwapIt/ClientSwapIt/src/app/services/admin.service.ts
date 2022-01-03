@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { EditUserRoleComponent } from '../accounts/admin/edit-user-role/edit-user-role.component';
 import { Category } from '../models/CategoryModel';
 import { CategoryModelHome } from '../models/CategoryModelHome';
+import { ContactModel } from '../models/ContactModel';
+import { Department } from '../models/DepartmentModel';
 import { EditUserModel } from '../models/EditUserModel';
 import { EditUserRoleModel } from '../models/EditUserRoleModel';
 import { ProductFinalModel } from '../models/ProductFinalModel';
@@ -109,13 +111,7 @@ export class AdminService {
   DeleteAllProducts(ids:string[]){
     return this.http.post(this.baseUrl+'DeleteAllProducts',ids,this.headers).pipe();
   }
-  SearchProducts(search:string):Observable<ProductModel[]>{
-    return this.http.get<ProductModel[]>(this.baseUrl+'SearchProducts/'+search,this.headers).pipe();
-  }
 
-  // Added
-
-  // GetHomeProducts
   GetHomeProducts(): Observable<ProductFinalModel[]> {
     return this.http.get<ProductFinalModel[]>(this.baseUrl + 'GetHomeProducts').pipe();
   }
@@ -133,8 +129,8 @@ export class AdminService {
     return this.http.get<ProductFinalModel[]>(this.baseUrl+'GetProfileProductsByEmail/'+email, this.headers).pipe();
   }
   
-  GetHomeCategories(): Observable<CategoryModelHome[]> {
-    return this.http.get<CategoryModelHome[]>(this.baseUrl + 'GetHomeCategories',this.headers).pipe();
+  GetHomeCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.baseUrl + 'GetHomeCategories',this.headers).pipe();
   }
 
   AddToCart(product: ProductFinalModel): Observable<ProductFinalModel> {
@@ -153,8 +149,26 @@ export class AdminService {
   RemoveProductFromAllFiles(productName:string){
     return this.http.get(this.baseUrl+'RemoveProductFromAllFiles/'+productName,this.headers).pipe();
   }
+  SearchProducts(search:string):Observable<ProductFinalModel[]>{
+    return this.http.get<ProductFinalModel[]>(this.baseUrl+'SearchProducts/'+search,this.headers).pipe();
+  }
+  GetAllContacts(): Observable<ContactModel[]> {
+    return this.http.get<ContactModel[]>(this.baseUrl + 'GetAllContacts',this.headers).pipe();
+  }
 
-  
+
+  /////////////////////////////////
+  GetDepartmentsById(id:number):Observable<Department[]>{
+    return this.http.get<Department[]>(this.baseUrl+'GetDepartmentsById/'+id, this.headers).pipe();
+  }
+ 
+  GetHomeProductsByDepartmentId(id:number):Observable<ProductFinalModel[]>{
+    return this.http.get<ProductFinalModel[]>(this.baseUrl+'GetHomeProductsByDepartmentId/'+id, this.headers).pipe();
+  }
+ 
+  GetProductsByTwoIds(idEncrypted: number):Observable<ProductFinalModel[]>{
+    return this.http.get<ProductFinalModel[]>(this.baseUrl+'GetProductsByTwoIds/'+ idEncrypted, this.headers).pipe();
+  }
 
   
 

@@ -34,6 +34,9 @@ export class UserService {
     return this.http.get<Department[]>(this.baseUrl + 'GetAllDepartments').pipe();
   }
 
+  AddContact(pro : FormData){
+    return this.http.post(this.baseUrl + 'AddContact', pro,{withCredentials: true}).pipe();
+  }
   // Added
 
   

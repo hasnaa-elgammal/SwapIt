@@ -1,8 +1,10 @@
 .container{
     margin-top: 25px;
+    
 }
 .card{
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 p{
     text-align: center;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { param } from 'jquery';
 import { EditUserModel } from 'src/app/models/EditUserModel';
 import { UserModel } from 'src/app/models/UserModel';
@@ -17,7 +17,8 @@ export class EditUserComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service:AdminService,
-    private activateRoute:ActivatedRoute
+    private activateRoute:ActivatedRoute,
+    private router:Router
   ) { }
 
   id:string;
@@ -192,6 +193,11 @@ GetAllUsers(){
   this.service.GetAllUsers().subscribe((list)=>{
     this.users=list;
   }, ex=> console.log(ex));
+}
+
+GoToList(){
+  sessionStorage.setItem('edituser','edituser');
+  this.router.navigate(['/admin']);
 }
 
 }

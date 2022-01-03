@@ -7,80 +7,130 @@
           <div class="row" id="one">
             <div class="vertical-menu">
                   <a  class="active">Categories</a>
-                  <a *ngFor="let cat of categories">
-                         
-                    <div class="dropdown">
-      
-                      <a class="btn  dropdown-toggle" (click)="toggleNav()" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{cat.categoryName}}
-                      </a>
-
-                      <!-- <ul  class="dropdown-menu" aria-labelledby="dropdownMenuLink" [class.show]="isOpen"> -->
-                        <!-- <ul  class="dropdown-menu" aria-labelledby="dropdownMenuLink" [class.show]="isOpen"></ul> -->
-                        <!-- <li><a class="dropdown-item"  routerLink="/dresses">Dresses</a></li>
-                        <li><a class="dropdown-item" >Pants</a></li> -->
-
-                        <!-- <li *ngFor="let dep of departments">
-                          <a class="dropdown-item" >{{dep.departmentName}}</a>
-                        </li> 
-
-                      </ul> -->
-                     </div>
+                    <a    *ngFor="let cat of categories">
+ 
+                      <a  (click)="GetDepartmentsById(cat.categoryId)" class="toHandPointer"  > {{cat.categoryName}} </a>
+                        <div *ngIf="checkSub(cat.categoryId)">
+                          <ul>
+                            <div  *ngFor="let dep of departments">
+                              <a (click)="GetProductsByTwoIds(cat.categoryId, dep.departmentId)"> {{dep.departmentName}} </a>
+                            </div>
+                          </ul>
+   
+                        </div>
+   
+   
                     </a>
-                  
              </div>
          </div>
       </div>
 
       
-        <div class="col col-7">
-          <div class="row">
+        <div class="col col-9">
+          <!-- <div class="row"> -->
 
-            <div class=" row"  id="body">
-             <div class="col col-12 " >
-              <span class="badge bg-dark">Top Sellers</span>
-
-              <div class="row" *ngFor="let product of products">
-                <div class="" >
-                <div class="card" >
-                <img [src]="SetImageProduct(product)" class="card-img-top" height="200px">
-                <div class="card-body">
-                  <h5 class="card-title">
-                      {{product.productName}}
-                  </h5>
-                  <p class="card-text">{{product.productDescription}}</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    <div >
-                      <p class="card-text"><small class="text-muted">BY:</small> {{product.ownerFirstName}} {{product.ownerLastName}}</p>
-        
-                    </div>
-                 
-                </li>
-                <div>
-                  <li class="list-group-item">{{product.productPrice  | currency}}
-                    <button type="button" *ngIf="this.auth.email != product.email" class="btn btn-dark">Swap</button>
-                    <button type="button" *ngIf="this.auth.email != product.email" class="btn btn-dark">Buy</button>
-                    <button type="button" *ngIf="this.auth.email == product.email" class="btn btn-dark" id ="del" (click)="RemoveProductFromAllFiles(product.productName)">Delete</button>
-                    <button type="button" *ngIf="this.auth.email == product.email" class="btn btn-dark" id ="edi">Edit</button>
-                    
-                    <div class="card-body">
-                    <a class="card-link " (click)="AddToFav(product)"><fa-icon [icon]="faHeart"></fa-icon></a>
-                    <a  class="card-link" (click)="AddToCart(product)"><fa-icon [icon]="faCartPlus "></fa-icon></a>
-        
-                    </div>
-                 
-                    </li>
-               </div>
+            <!-- <div class=" row"  id="body"> -->
+             <!-- <div class="col col-12 " > -->
+              <span class="badge bg-dark ">Top Sellers</span>
+              <div class="row">
+                
+                <div class="col col-4" *ngFor="let product of products">
+                  <div class="" >
+                  <div class="card" >
+                  <img [src]="SetImageProduct(product)" class="card-img-top" height="200px">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                        {{product.productName}}
+                    </h5>
+                    <p class="card-text">{{product.productDescription}}</p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div >
+                        <p class="card-text"><small class="text-muted">BY:</small> {{product.ownerFirstName}} {{product.ownerLastName}}</p>
+          
+                      </div>
                   
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        
-                </ul>
-               
+                  </li>
+                  <div>
+                    <li class="list-group-item">{{product.productPrice  | currency}}
+                     
+                      <!-- <button type="button" *ngIf="check(this.auth.email, product.email , product.forswap)" class="btn btn-dark">Swap</button>
+                      <button type="button" *ngIf="check(this.auth.email, product.email , product.forsell)" class="btn btn-dark">Buy</button> -->
+                      <button type="button" *ngIf="this.auth.email == product.email" class="btn btn-danger" id ="del" (click)="RemoveProductFromAllFiles(product.productName)">Delete</button>
+  
+                      <!-- <button type="button" *ngIf="this.auth.email == product.email" class="btn btn-dark" id ="edi">Edit</button> -->
+                      <div class="card-body">
+                      <a class="card-link " (click)="AddToFav(product)"><fa-icon [icon]="faHeart"></fa-icon></a>
+                      <a  class="card-link" (click)="AddToCart(product)"><fa-icon [icon]="faCartPlus "></fa-icon></a>
+          
+                      </div>
+                  
+                      </li>
+                </div>
+                    
+                <a href="#" class="btn btn-dark" (click)="open(content)">View More</a>
+                <ng-template #content let-modal>
+                  <div class="modal-header">
+                    <button type="button" class="close " aria-label="Close" (click)="modal.dismiss('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class=" ">
+                    <div class="col col-12 col-md-6 col-lg-3" >
+                      <div class="card" id="view">
+                        <img [src]="SetImageProduct(product)" class="card-img-top" height="200px">
+                        <div class="card-body">
+                        <h5 class="card-title">
+                            {{product.productName}}
+                        </h5>
+                        <p class="card-text">{{product.productDescription}}</p>
+                      </div>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                                
+                          <div >
+                            <p class="card-text"><small class="text-muted">BY:</small> {{product.ownerFirstName}}{{product.ownerLastName}}</p>
+              
+                           </div>
+                       
+                      </li>
+                      <div>
+                        <li class="list-group-item">{{product.productPrice  | currency}}
+                          <!-- <button type="button" class="btn btn-dark">Swap</button> -->
+                          <div class="card-body">
+                              <a id="poplink" class="card-link " routerLink="/cart"><fa-icon [icon]="faCartPlus "></fa-icon></a>
+                              <a id="poplink" class="card-link" routerLink="/fav"><fa-icon [icon]="faHeart "></fa-icon></a>
+
+                       </div>
+                       <div class="card-body"></div>
+                      </li>
+                          </div>
+                        
+                        
+              
+                       
+                      </ul>
+                     
+                    </div>
+                  </div>
+                   
+                  </div>
+                  <div class="modal-footer"> 
+                    <button type="button" class="  btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+                  </div>
+                </ng-template>
+
+
+                
+          
+                  </ul>
+                
+                </div>
+                  </div>
+                </div>
+              
               </div>
-            </div>
-            </div>
 
              
              
@@ -154,10 +204,10 @@
            </div> -->
           
              
-          </div>
-          
-          </div>
-            </div>
+          <!-- </div>
+           -->
+          <!-- </div> -->
+            <!-- </div> -->
 
     
       <div class="col col-2">

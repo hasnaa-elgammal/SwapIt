@@ -1,8 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      SWAP IT
-      <p>SWAP  BUY   SELL</p>
+      <img [src]="logo" width="170px" height="140px">
     </a>
     <button (click)="toggleNav()" class="navbar-toggler btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span > <fa-icon [icon]="faBars"></fa-icon></span>
@@ -24,8 +23,10 @@
         
         
       </ul>
+
+      
       <!-- [FormGroup]="formSearch" -->
-      <form class="d-flex"  (ngSubmit)="onSearch()">
+      <form class="d-flex"  (ngSubmit)="onSearch()" [formGroup]="formSearch">
           <div class="one">
           <button class="btn " type="submit"[disabled]="formSearch.invalid">
               <fa-icon [icon]="faSearch"></fa-icon>

@@ -9,6 +9,7 @@ export class ProductFinalModel{
     productDescription: string;
     forswap: boolean;
     forsell: boolean;
+    categoryId:number;
     
     // added
     

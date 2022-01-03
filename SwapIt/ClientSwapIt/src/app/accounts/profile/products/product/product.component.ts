@@ -8,6 +8,8 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import{faStar} from '@fortawesome/free-solid-svg-icons';
 import {faCog, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { AdminService } from 'src/app/services/admin.service';
+import { ProductFinalModel } from 'src/app/models/ProductFinalModel';
 
 
 
@@ -18,18 +20,21 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 })
 export class ProductComponent implements OnInit {
 
+  isShown:boolean;
+  currentOpen:number;
 
   constructor(
     private service:UserService,
     private auth: AuthService,
-    private router:Router
+    private router:Router,
+    private serviceAdmin:AdminService,
   ) { }
   
   faHeart= faHeart;
   faCartPlus=faCartPlus;
   photo:'assets/book.jpg';
 
-  products:ProductModel[];
+  products:ProductFinalModel[];
   ngOnInit(): void {
     
     this.products=null;
@@ -42,13 +47,32 @@ export class ProductComponent implements OnInit {
     // faCartPlus=faCartPlus;
     // faStar=faStar;
 
-    this.getProducts();
+    // this.getProducts();
   }
-  getProducts() {
-    this.service.GetAllProducts().subscribe((list)=>{
+  // getProducts() {
+  //   this.service.GetAllProducts().subscribe((list)=>{
+  //     this.products=list;
+  //  },err=>console.log(err));
+  // }
+
+
+ 
+  GetHomeProductsByDepartmentId(id: number){
+    this.serviceAdmin.GetHomeProductsByDepartmentId(id).subscribe((list)=>{
       this.products=list;
    },err=>console.log(err));
   }
-
-
+ 
+  check(email1: string, email2: string, flag: boolean){
+    return email1 != email2 && flag == true;
+  }
+  checkSub(catId: number){
+    return catId == this.currentOpen; 
+  }
+  GetProductsByTwoIds(catId: number, depId: number){
+    catId =  catId* 1000000 + depId;
+    this.serviceAdmin.GetProductsByTwoIds(catId).subscribe((list)=>{
+      this.products=list;
+   },err=>console.log(err));
+  }
 }

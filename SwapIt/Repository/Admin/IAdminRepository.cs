@@ -29,7 +29,7 @@ namespace SwapIt.Repository.Admin
         Task<bool> DeleteSubCategoryAsync(List<String> ids);
         Task<IEnumerable<Product>> GetProducts();
         Task<IEnumerable<Product>> GetAllProductsAsync();
-
+        Task<IEnumerable<Chat>> GetAllContactsAsync();
         Task<bool> AddProductAsync(String departmentId, String productName, String productDescription, String productPrice, String productQuantity);
 
         Task<bool> DeleteProductsAsync(List<string> ids);
@@ -50,7 +50,9 @@ namespace SwapIt.Repository.Admin
         Task<Product> RemoveFromFavAsync(int id);
         Task<Product> RemoveProductFromAllFilesAsync(string productName);
 
-
+        Task<IEnumerable<CategoryDepartment>> GetDepartmentsByIdAsync(int id);
+        Task<IEnumerable<Product>> GetHomeProductsByDepartmentIdAsync(int id);
+        Task<IEnumerable<Product>> GetProfileProductsByEmailAsync(int idEncrypted);
 
 
 

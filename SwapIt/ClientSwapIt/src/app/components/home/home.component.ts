@@ -8,6 +8,7 @@ import { AdminService } from 'src/app/services/admin.service';
 import { Department } from 'src/app/models/DepartmentModel';
 import { CategoryModelHome } from 'src/app/models/CategoryModelHome';
 import { AuthService } from 'src/app/services/auth.service';
+import { Category } from 'src/app/models/CategoryModel';
 
 
 
@@ -20,24 +21,17 @@ export class HomeComponent implements OnInit {
   isOpen:boolean= false;
   faHeart=faHeart;
   faCartPlus=faCartPlus;
+  isShown:boolean;
+  currentOpen:number;
   departments: Department[];
 
 
   closeResult: string | undefined;
   products : ProductFinalModel[];
-  categories: CategoryModelHome[];
+  categories: Category[];
   
 
-  // products: Product[] = [
-  //   {category:'Bages',photo:'assets/bag.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
-  //   {category:'Books',photo:'assets/book.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
-  //   {category:'Clothes',photo:'assets/clothes.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
-  //   {category:'Clothes',photo:'assets/clothes2.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
-
-  //   {category:'Furniture',photo:'assets/furniture.jpg',owner:'sabreen hassan', desc:'this a photo', price:5},
-
-
-  // ];
+  
   pidandemail: string[];
 
 
@@ -110,4 +104,37 @@ export class HomeComponent implements OnInit {
   }
   
 
+  GetDepartmentsById(id: number){
+    if(this.isShown == true) this.isShown = false;
+    else this.isShown = true;
+    if(this.isShown == false){
+      this.currentOpen = -1;
+      this.departments = [];
+    }
+    else this.currentOpen = id;
+ 
+    this.serviceAdmin.GetDepartmentsById(id).subscribe((list)=>{
+      this.departments=list;
+   },err=>console.log(err));
+  }
+ 
+  GetHomeProductsByDepartmentId(id: number){
+    this.serviceAdmin.GetHomeProductsByDepartmentId(id).subscribe((list)=>{
+      this.products=list;
+   },err=>console.log(err));
+  }
+ 
+  check(email1: string, email2: string, flag: boolean){
+    return email1 != email2 && flag == true;
+  }
+  checkSub(catId: number){
+    return catId == this.currentOpen; 
+  }
+  GetProductsByTwoIds(catId: number, depId: number){
+    catId =  catId* 1000000 + depId;
+    this.serviceAdmin.GetProductsByTwoIds(catId).subscribe((list)=>{
+      this.products=list;
+   },err=>console.log(err));
+
+}
 }

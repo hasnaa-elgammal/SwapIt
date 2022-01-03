@@ -1,6 +1,7 @@
 export class AddProductModel {
 
 
+    categoryId:number;
     userEmail: string;
     departmentId: number;
     productName: string;

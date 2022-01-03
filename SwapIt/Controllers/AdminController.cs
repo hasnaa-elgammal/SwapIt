@@ -16,10 +16,12 @@ namespace SwapIt.Controllers
     //[Authorize(Roles ="Admin")]
     public class AdminController : ControllerBase
     {
+        
         private readonly IAdminRepository _repo;
 
         public AdminController(IAdminRepository repo)
         {
+            
             _repo = repo;
         }
 
@@ -532,6 +534,58 @@ namespace SwapIt.Controllers
         }
 
 
+        [Route("GetAllContacts")]
+        [HttpGet]
+        public async Task<IEnumerable<Chat>> GetAllContacts()
+        {
+
+            var contacts = await _repo.GetAllContactsAsync();
+
+            if (contacts != null)
+            {
+                return contacts;
+            }
+            return null;
+        }
+
+
+        [Route("GetDepartmentsById/{id}")]
+        [HttpGet]
+        public async Task<IEnumerable<CategoryDepartment>> GetDepartmentsById(int id)
+        {
+
+            var departments = await _repo.GetDepartmentsByIdAsync(id);
+            if (departments != null)
+            {
+                return departments;
+            }
+            return null;
+        }
+
+        [Route("GetHomeProductsByDepartmentId/{id}")]
+        [HttpGet]
+        public async Task<IEnumerable<Product>> GetHomeProductsByDepartmentId(int id)
+        {
+
+            var products = await _repo.GetHomeProductsByDepartmentIdAsync(id);
+            if (products != null)
+            {
+                return products;
+            }
+            return null;
+        }
+        [Route("GetProductsByTwoIds/{idEncrypted}")]
+        [HttpGet]
+        public async Task<IEnumerable<Product>> GetProfileProductsByEmail(int idEncrypted)
+        {
+
+            var products = await _repo.GetProfileProductsByEmailAsync(idEncrypted);
+            if (products != null)
+            {
+                return products;
+            }
+            return null;
+        }
 
 
 

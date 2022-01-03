@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 import { AddProductModel } from 'src/app/models/AddProductModel';
+import { Category } from 'src/app/models/CategoryModel';
 import { Department } from 'src/app/models/DepartmentModel';
 import { ProductFinalModel } from 'src/app/models/ProductFinalModel';
 import { ProductModel } from 'src/app/models/ProductModel';
+import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -19,7 +21,8 @@ export class AdvertiseComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: UserService,
-    private auth: AuthService
+    private auth: AuthService,
+    private serviceAdmin:AdminService,
 
   ) { }
   image: File;
@@ -28,14 +31,17 @@ export class AdvertiseComponent implements OnInit {
   product: ProductFinalModel;
   email = this.auth.email;
   departments:Department[];
+  categories:Category[];
   d: Department;
 
   ngOnInit(): void {
     this.successMessage ='';
 
     this.GetAllDepartments();
+    this.GetHomeCategories();
 
     this.product = {
+      categoryId:0,
       email: '',
       departmentId: 0,
       productName: '',
@@ -64,6 +70,7 @@ export class AdvertiseComponent implements OnInit {
       productQuantity: [0, Validators.required],
       productSize: '',
       productDescription: '',
+      categoryId:-1,
       forswap: true,
       forsell: true
     });
@@ -85,6 +92,7 @@ export class AdvertiseComponent implements OnInit {
         formdata.append('productDescription', this.product.productDescription);
         formdata.append('forsell', this.product.forsell.toString());
         formdata.append('forswap', this.product.forswap.toString());
+        formdata.append('categoryId', this.product.categoryId.toString());
       this.service.AddProduct(formdata).subscribe(s => {
         this.successMessage = 'Product Added Successfully';
       }, ex => {
@@ -124,6 +132,10 @@ export class AdvertiseComponent implements OnInit {
       this.departments = list;
     }, err =>{console.log(err);})
   }
- 
+  GetHomeCategories(){
+    this.serviceAdmin.GetHomeCategories().subscribe((list)=>{
+      this.categories=list;
+   },err=>console.log(err));
+  }
 
 }

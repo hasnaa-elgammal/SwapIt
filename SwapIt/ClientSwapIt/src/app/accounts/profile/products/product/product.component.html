@@ -70,10 +70,11 @@
         </li>
         <div>
           <li class="list-group-item">{{product.productPrice  | currency}}
-            <button type="button" class="btn btn-dark">Swap</button>
-            <button type="button" class="btn btn-dark" id ="del">Delete</button>
-            <button type="button" class="btn btn-dark" id ="edi">Edit</button>
-            
+          <!-- <button type="button" *ngIf="check(this.auth.email, product.email , product.forswap)" class="btn btn-dark">Swap</button>
+          <button type="button" *ngIf="check(this.auth.email, product.email , product.forsell)" class="btn btn-dark">Buy</button> -->
+          <!-- <button type="button" *ngIf="this.auth.email == product.email" class="btn btn-dark" id ="del" (click)="RemoveProductFromAllFiles(product.productName)">Delete</button>
+ 
+          <button type="button" *ngIf="this.auth.email == product.email" class="btn btn-dark" id ="edi">Edit</button> -->
             <div class="card-body">
             <a class="card-link " routerLink="/fav"><fa-icon [icon]="faHeart"></fa-icon></a>
             <a  class="card-link" routerLink="/cart"><fa-icon [icon]="faCartPlus "></fa-icon></a>

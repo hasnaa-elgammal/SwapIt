@@ -1,7 +1,9 @@
 .row{
     margin-top:30px;
 }
-
+.toHandPointer{
+  cursor: pointer;
+}
 .vertical-menu {
     width: 200px; 
   }
@@ -52,9 +54,9 @@
    font-size: 14px;
  }
  
- #one{
+ /* #one{
    margin-left:50px;
- }
+ } */
 #view{
   width:400px;
   margin-left: 30px;

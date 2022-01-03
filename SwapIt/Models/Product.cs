@@ -24,6 +24,7 @@ namespace SwapIt.Models
         public short ProductQuantity { get; set; }
         public string ProductSize { get; set; }
         public string ProductDescription { get; set; }
+        public int CategoryId { get; set; }
         public bool? Forswap { get; set; }
         public bool? Forsell { get; set; }
         // Added

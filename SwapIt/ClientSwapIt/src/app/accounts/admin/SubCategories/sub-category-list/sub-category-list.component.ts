@@ -54,7 +54,7 @@ export class SubCategoryListComponent implements OnInit {
     var count=$(".ckitem:checked").length;
     this.num=count;
   }
-
+  
   DeleteConfirm(){
     var checkboxes=document.getElementsByClassName('ckitem');
     if(checkboxes.length > 0){

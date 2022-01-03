@@ -11,14 +11,18 @@
             <div class="alert alert-danger" *ngIf="this.userForm.get('userName').errors?.userName && this.userForm.get('userName').touched">Invalid UserName</div>
             <div class="alert alert-danger" *ngIf="this.existsmessage !='' && this.existsmessage !=null && this.userForm.get('userName').value !== null && this.userForm.get('userName').value !== '' && isEmailExists()">{{this.existsmessage}}</div>
         </div>
+        <div class="col-md-12" >
         <div class="form-group mt-3">
           <label for="roleName">Users Roles</label>
           <select class="form-control" formControlName="roleName" name="roleName" id="roleName" (change)="onRoleChange()">
             <option *ngFor="let item of roles"[value]="item.id">{{item.name}}</option>
           </select>
         </div>
+    </div>
+    <div class="col-md-12" >
         <div class="btn-area">
             <button type="submit" class="btn btn-primary"[disabled]="userForm.invalid">Update</button>
+        </div>
         </div>
     </form>
     </div>

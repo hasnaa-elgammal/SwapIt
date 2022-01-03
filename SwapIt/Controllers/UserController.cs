@@ -56,6 +56,7 @@ namespace SwapIt.Controllers
             var productDescription = HttpContext.Request.Form["productDescription"].FirstOrDefault();
             var forsell = bool.Parse(HttpContext.Request.Form["forsell"].FirstOrDefault());
             var forswap = bool.Parse(HttpContext.Request.Form["forswap"].FirstOrDefault());
+          //  var categoryId = int.Parse(HttpContext.Request.Form["categoryId"].FirstOrDefault());
 
             if (userEmail != null)
             {
@@ -68,7 +69,7 @@ namespace SwapIt.Controllers
                     if (image != null && image.Length > 0)
                     {
                         var newfilename = DateTime.Now.ToString("yyMMddhhmmss") + image.FileName;
-                        var filepath = Path.Combine(@"D:\FinalEdit\SwapIt\SwapIt\ClientSwapIt\src\assets\images\products", newfilename);
+                        var filepath = Path.Combine(@"C:\Users\EL-MAGD\Desktop\SwapIt_last\SwapIt\ClientSwapIt\src\assets\images\products", newfilename);
                         using (FileStream f = new FileStream(filepath, FileMode.Create))
                         {
                             await image.CopyToAsync(f);
@@ -94,6 +95,7 @@ namespace SwapIt.Controllers
                     p.Email = user.Email;
                     p.SIsOwner = "true";
                     p.ProductImage = p.ProductSize;
+                    p.CategoryId =await _db.CategoryDepartments.Where(x=>x.DepartmentId==departmentId).Select(x=>x.CategoryId).FirstOrDefaultAsync();
 
 
                     var result = await _db.Products.AddAsync(p);
@@ -113,9 +115,32 @@ namespace SwapIt.Controllers
 
         // Added
 
-        
 
-        
+
+        [Route("AddContact")]
+        [HttpPost]
+        public async Task<IActionResult> AddContact()
+        {
+
+            var name = HttpContext.Request.Form["contactName"].FirstOrDefault();
+            var email = HttpContext.Request.Form["contactEmail"].FirstOrDefault();
+            var productDescription = HttpContext.Request.Form["contactMsg"].FirstOrDefault();
+
+            if (email != null)
+            {
+                Chat c = new Chat();
+
+                c.name = name;
+                c.email = email;
+                c.MessageText = productDescription;
+                var result = await _db.Chats.AddAsync(c);
+                _db.SaveChanges();
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+
 
     }
 }

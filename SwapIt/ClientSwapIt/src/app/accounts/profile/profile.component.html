@@ -37,7 +37,7 @@
         
         <div class="row" *ngFor="let product of products">
           <div class="" >
-          <div class="card" >
+          <div class="card mb-4" >
           <img [src]="SetImageProduct(product)" class="card-img-top" height="200px">
           <div class="card-body">
             <h5 class="card-title">
@@ -55,8 +55,8 @@
           <div>
             <li class="list-group-item">{{product.productPrice  | currency}}
               <button type="button" *ngIf="this.auth.email != this.email" class="btn btn-dark">Swap</button>
-              <button type="button" *ngIf="this.auth.email == this.email" class="btn btn-dark" (click)="RemoveProductFromAllFiles(product.productName)">Delete</button>
-              <button type="button" *ngIf="this.auth.email == this.email" class="btn btn-dark" id ="edi">Edit</button>
+              <button type="button" *ngIf="this.auth.email == this.email" class="btn btn-danger ml-4" (click)="RemoveProductFromAllFiles(product.productName)">Delete</button>
+              <!-- <button type="button" *ngIf="this.auth.email == this.email" class="btn btn-dark" id ="edi">Edit</button> -->
               
               <div class="card-body">
               <a class="card-link " (click)="AddToFav(product)" ><fa-icon [icon]="faHeart"></fa-icon></a>

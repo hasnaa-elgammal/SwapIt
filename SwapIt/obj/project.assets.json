@@ -8482,19 +8482,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\FreeComp\\.nuget\\packages\\": {}
+    "C:\\Users\\EL-MAGD\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FinalEdit\\SwapIt\\SwapIt\\SwapIt.csproj",
+      "projectUniqueName": "C:\\Users\\EL-MAGD\\Desktop\\SwapIt_last\\SwapIt\\SwapIt.csproj",
       "projectName": "SwapIt",
-      "projectPath": "D:\\FinalEdit\\SwapIt\\SwapIt\\SwapIt.csproj",
-      "packagesPath": "C:\\Users\\FreeComp\\.nuget\\packages\\",
-      "outputPath": "D:\\FinalEdit\\SwapIt\\SwapIt\\obj\\",
+      "projectPath": "C:\\Users\\EL-MAGD\\Desktop\\SwapIt_last\\SwapIt\\SwapIt.csproj",
+      "packagesPath": "C:\\Users\\EL-MAGD\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\EL-MAGD\\Desktop\\SwapIt_last\\SwapIt\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\FreeComp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\EL-MAGD\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8583,7 +8583,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.210\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

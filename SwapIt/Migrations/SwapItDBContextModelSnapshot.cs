@@ -229,6 +229,12 @@ namespace SwapIt.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("to_id");
 
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("MessageId")
                         .HasName("PK__Chat__0BBF6EE60384159D");
 
@@ -322,6 +328,9 @@ namespace SwapIt.Migrations
                         .HasColumnType("int")
                         .HasColumnName("product_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int")

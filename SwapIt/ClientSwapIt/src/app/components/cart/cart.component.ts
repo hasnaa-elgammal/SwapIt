@@ -6,6 +6,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ProductFinalModel } from 'src/app/models/ProductFinalModel';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -19,6 +20,8 @@ export class CartComponent implements OnInit {
   faCartPlus=faCartPlus;
   faTrash= faTrash
   products: ProductFinalModel[];
+  isShown:boolean;
+  currentOpen:number;
 
 
   
@@ -35,8 +38,10 @@ export class CartComponent implements OnInit {
 
   constructor(
     private serviceAdmin: AdminService,
-    public auth : AuthService 
+    public auth : AuthService ,
+    private modalService: NgbModal, 
   ) { }
+  closeResult: string | undefined;
 
   ngOnInit(): void {
     this.GetCartProductsByEmail();
@@ -59,12 +64,52 @@ export class CartComponent implements OnInit {
   RemoveFromCart(id : number){
     this.serviceAdmin.RemoveFromCart(id).subscribe(x=>{
     },ex=>console.log(ex));
+    window.location.reload();
   }
 
   RemoveProductFromAllFiles(productName: string){
     this.serviceAdmin.RemoveProductFromAllFiles(productName).subscribe(x=>{
     },ex=>console.log(ex));
+    window.location.reload();
+  }
+
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 
+  
+ 
+  GetHomeProductsByDepartmentId(id: number){
+    this.serviceAdmin.GetHomeProductsByDepartmentId(id).subscribe((list)=>{
+      this.products=list;
+   },err=>console.log(err));
+  }
+ 
+  check(email1: string, email2: string, flag: boolean){
+    return email1 != email2 && flag == true;
+  }
+  checkSub(catId: number){
+    return catId == this.currentOpen; 
+  }
+  GetProductsByTwoIds(catId: number, depId: number){
+    catId =  catId* 1000000 + depId;
+    this.serviceAdmin.GetProductsByTwoIds(catId).subscribe((list)=>{
+      this.products=list;
+   },err=>console.log(err));
+}
 }

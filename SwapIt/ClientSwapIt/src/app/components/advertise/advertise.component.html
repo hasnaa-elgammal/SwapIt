@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pt-4 pb-5">
     <h2 class="text-center">Add your product</h2>
     <div class="alert alert-success fade show" role="alert" *ngIf="this.successMessage != null && this.successMessage != ''">
         <span>{{this.successMessage}}</span>
@@ -17,6 +17,14 @@
           <input formControlName="productName" class="form-control" type="text" placeholder="Enter Your Product Name" aria-label="default input example">
           <div class="alert alert-danger" *ngIf="this.productForm.get('productName').errors?.required && this.productForm.get('productName').touched">Product Name is required</div>
       </div> 
+      <div class="col-md-12">
+        <label for="productName" class="form-label">Category of Product <span class="required-asterisk">*</span></label>
+        <select class="form-control" formControlName="categoryId" >
+        <option [ngValue]="-1" disabled>Choose catrgory</option>
+        <option *ngFor="let cat of categories" [ngValue]="cat.categoryId">{{cat.categoryName}}</option>
+        </select>
+        <div class="alert alert-danger" *ngIf="this.productForm.get('categoryId').value == -1 && this.productForm.get('categoryId').touched">Product Category is required</div>
+    </div>
 
         <div class="col-md-12">
           <label for="productName" class="form-label">Department of Product <span class="required-asterisk">*</span></label>
@@ -26,6 +34,8 @@
           </select>
           <div class="alert alert-danger" *ngIf="this.productForm.get('productDepartment').value == -1 && this.productForm.get('productDepartment').touched">Product Department is required</div>
       </div> 
+
+      
 
 
 

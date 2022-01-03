@@ -33,6 +33,7 @@ import { ForgotresetpassComponent } from './accounts/forgotresetpass/forgotreset
 import { SubCategoryComponent } from './accounts/admin/SubCategories/sub-category/sub-category.component';
 import { AddProductComponent } from './accounts/admin/Products/add-product/add-product.component';
 import { EditproductComponent } from './accounts/admin/Products/editproduct/editproduct.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 const routes: Routes = [
@@ -65,9 +66,10 @@ const routes: Routes = [
   {path:'edituserrole/:id/:id1',component:EditUserRoleComponent},
   {path:'subcategory',component:SubCategoryComponent},
   {path:'editsubcategory/:id/:id1/:id2',component:SubCategoryComponent},
-  {path:'editproduct/:id',component:AddProductComponent},
+  // {path:'editproduct/:id',component:AddProductComponent},
   {path:'addproduct',component:AddProductComponent},
   {path:'editproduct/:id',component:EditproductComponent},
+  {path:'search/:text' , component:SearchComponent},
 
 
   // {path:'edituser/:id' ,component:AddUserComponent},

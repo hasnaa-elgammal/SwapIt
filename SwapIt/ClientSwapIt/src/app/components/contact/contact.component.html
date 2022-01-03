@@ -1,23 +1,25 @@
 <div class="d">
 
-<div class="container ">
+<div class="container pt-4">
+  
     <h1 class="font_2 mt-4"  style="text-align:center;font-size:40px">Contact</h1>
     <p class="font_7" style="line-height:1.7em;text-align:center;font-size:26px">You're welcome to contact us with any inquiry</p>
+    <div div class="alert alert-success fade show" role="alert" *ngIf="this.successMessage != null && this.successMessage != ''">
+      <span>{{this.successMessage}}</span>
+  </div>
+    <form (ngSubmit)="AddContact()" [formGroup]="ContactForm" >
     
-    <form >
+        <label class="font_7" for="contactName">Full Name</label>
+        <input formControlName="contactName" type="text"  placeholder="Your name..">
     
-        <label class="font_7" >First Name</label>
-        <input type="text" id="fname" name="firstname" placeholder="Your name..">
-    
-        <label for="lname">Last Name</label>
-        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-        <label for="lname">Email</label>
-        <input type="text" id="email" name="email" placeholder="Your Email..">
+        
+        <label for="contactEmail">Email</label>
+        <input formControlName="contactEmail" type="text"  placeholder="Your Email..">
     
     
         
-        <label for="subject">Subject</label>
-        <textarea id="subject" name="subject" placeholder="Write something.." style="height:70px"></textarea>
+        <label for="contactMsg">Subject</label>
+        <textarea formControlName="contactMsg"  placeholder="Write something.." style="height:70px"></textarea>
     
         <input type="submit" value="Submit">
     

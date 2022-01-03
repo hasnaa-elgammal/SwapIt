@@ -1,19 +1,42 @@
 .container{
     margin-top: 25px;
+    
 }
 .card{
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 p{
     text-align: center;
 }
-.card-body{
+
+#view{
+    width:400px;
+    margin-left: 30px;
+   
+  }
+  #poplink{
+    color: rgb(53, 52, 52);
+  }
+  
+  .card-body{
     float: right;
     padding-top: 10px;
     padding-right: 2px;
     
    
-}
+  }
 a{
     color: rgb(41, 40, 40);
 }
+.card{
+    margin-bottom: 20px;
+   }
+   
+   span{
+     color: white;
+     width: 100px;
+     height: 25px;
+     font-weight: bold;
+     font-size: 14px;
+   }

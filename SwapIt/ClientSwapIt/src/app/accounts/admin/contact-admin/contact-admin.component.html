@@ -1,0 +1,61 @@
+<div class="user-role">
+    <div class="alert alert-primary mb-3" role="alert">
+        <strong>Contacts List</strong>
+    </div>
+
+    <table class="table table-light rounded mb-3">
+        <thead>
+            <tr class="bg-dark text-light">
+                <th>Users Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                
+                <th>
+                    <input id="first" type="checkbox" class="ckheader" (change)="SelectAll()" >
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of contacts">
+                <td scope="row">
+                    {{item.name}}
+                </td>
+                <td>
+                    {{item.email}}
+                </td>
+                <td>
+                    {{item.messageText}}
+                </td>
+                <td>
+                    <input type="checkbox" class="ckitem" id="ckitem" value="{{item.messageId}}">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modelId"[disabled]="!IsDelete()"(click)="DeleteCount()">
+            Delete
+          </button>
+        
+    </div>
+</div>
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Alert</h5>
+                    
+            </div>
+            <div class="modal-body">
+                You Have Chosen {{num}} Elements to Delete, Do you want to Delete?
+            </div>
+            <div class="modal-footer">
+                <button id="btClose" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger"(click)="DeleteConfirm()"data-dismiss="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
