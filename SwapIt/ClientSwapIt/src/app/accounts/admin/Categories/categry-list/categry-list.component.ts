@@ -18,7 +18,7 @@ export class CategryListComponent implements OnInit {
 
   categories:Category[];
   num:number;
-  
+
 
   ngOnInit(): void {
     this.categories=null;
@@ -49,7 +49,7 @@ export class CategryListComponent implements OnInit {
           if($(checkboxes[i]).is(":checked")){
             return true;
           }
-         
+
        }
     }
     return false;
@@ -68,14 +68,14 @@ export class CategryListComponent implements OnInit {
             var id= $(checkboxes[i]).val() as string;
             ids.push(id);
           }
-         
+
        }
        this.service.DeleteAllCategory(ids).subscribe(s=>{
          this.getCategories();
          $("#btnClose").trigger("click");
        },ex=>console.log(ex));
     }
-    
+
   }
 
   SelectAll(){
@@ -83,7 +83,7 @@ export class CategryListComponent implements OnInit {
     var header=tbl.find('thead .ckheader');
     var item=tbl.find('tbody .ckitem');
 
-    
+
     $(function(ready){
       item.on('change',function(){
         if($(this).is(':checked')){
@@ -94,9 +94,7 @@ export class CategryListComponent implements OnInit {
         }
       });
       header.change(function(){
-        
-        // var c= this.checked;
-        // item.prop("checked",c);
+
         item.trigger('check');
         if($(this).is(':checked')){
           $(item).closest('tr').addClass('NewRowColor');

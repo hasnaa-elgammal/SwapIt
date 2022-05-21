@@ -35,13 +35,12 @@ export class EditUserRoleComponent implements OnInit {
     };
 
     this.isbusy=false;
-    this.existsmessage = ''; 
+    this.existsmessage = '';
     this.userForm = this.fb.group({
-      // email: ['', [Validators.required, Validators.email]],
       userName: ['', Validators.required],
       roleName: ['', Validators.required],
-      
-      
+
+
     });
 
 
@@ -55,12 +54,12 @@ export class EditUserRoleComponent implements OnInit {
           this.userName=x.userName;
           this.roleId=roleId;
           this.AddUserData();
- 
+
         },ex=>console.log(ex));
         this.service.GetAllRoles().subscribe(s=>{
           this.roles=s;
         },ex=>console.log(ex))
-        
+
       }else{
         this.router.navigate(['notfound']).then(x=>{window.location.reload()});
       }
@@ -93,7 +92,7 @@ export class EditUserRoleComponent implements OnInit {
       this.existsmessage ='';
       return false;
     }
-   
+
   }
 
   onRoleChange(){

@@ -40,7 +40,7 @@ export class ContactAdminComponent implements OnInit {
     var header=tbl.find('thead .ckheader');
     var item=tbl.find('tbody .ckitem');
 
-    
+
     $(function(ready){
       item.on('change',function(){
         if($(this).is(':checked')){
@@ -51,9 +51,7 @@ export class ContactAdminComponent implements OnInit {
         }
       });
       header.change(function(){
-        
-        // var c= this.checked;
-        // item.prop("checked",c);
+
         item.trigger('check');
         if($(this).is(':checked')){
           $(item).closest('tr').addClass('NewRowColor');
@@ -74,7 +72,7 @@ export class ContactAdminComponent implements OnInit {
           if($(checkboxes[i]).is(":checked")){
             return true;
           }
-         
+
        }
     }
     return false;
@@ -88,14 +86,14 @@ export class ContactAdminComponent implements OnInit {
             var id= $(checkboxes[i]).val() as string;
             ids.push(id);
           }
-         
+
        }
        this.service.DeleteAllProducts(ids).subscribe(s=>{
          this.getContacts();
          $("#btnClose").trigger("click");
        },ex=>console.log(ex));
     }
-    
+
   }
   DeleteCount(){
     var count=$(".ckitem:checked").length;
