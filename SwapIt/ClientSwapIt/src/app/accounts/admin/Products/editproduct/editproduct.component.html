@@ -6,65 +6,54 @@
           <div class="alert alert-success" role="alert" *ngIf="msg">
               <strong>{{msg}}</strong>
           </div>
-      
+
           <form [formGroup]="productForm" (ngSubmit)="EditProduct()">
-      
+
               <div class="card text-left">
                   <h4 class="card-title pt-3 pl-3"> Edit Product Information</h4>
                 <div class="card-body">
-      
+
                   <div class="form-group">
                       <div class="col-md-12">
                       <select class="custom-select" formControlName="departmentId" required>
-              
+
                           <option selected value="0" disabled>Choose the category</option>
                           <option *ngFor="let cat of subCategories" [value]="cat.departmentId">{{cat.departmentName}}</option>
                           <div class="alert alert-danger" *ngIf="!this.productForm.get('departmentId').valid && this.productForm.get('departmentId').touched">MainCategory name is required</div>
-              
+
                       </select>
-                      <!-- <div class="text-danger" *ngIf="this.productForm.get('departmentId').value<1&& this.productForm.get('departmentId').touched">
-                          {{messages.departmentId.required}}
-                      </div> -->
-                  
-                  
+
+
                       </div>
                     </div>
-                  
+
                   <div class="form-group">
                     <input type="text" formControlName="productName" class="form-control" name="" id="" placeholder="Product Name">
-                     <!-- <div class="text-danger"*ngIf="this.productForm.get('productName').errors.required&& this.productForm.get('productName').touched">
-                      {{messages.productName.required}}
-                     </div> -->
+
                   </div>
-      
+
                   <div class="form-group">
                       <textarea type="text" formControlName="productDescription" class="form-control" name="" id="" placeholder="Product Description"></textarea>
-                       <!-- <div class="text-danger"*ngIf="this.productForm.get('productDescription').errors.required&& this.productForm.get('productDescription').touched">
-                          {{messages.productDescription.required}}
-                       </div> -->
+
                     </div>
-      
+
                     <div class="form-group">
                       <input type="number" formControlName="productPrice" class="form-control" name="" id="" placeholder="Product Price">
-                       <!-- <div class="text-danger"*ngIf="this.productForm.get('productPrice').errors.required&& this.productForm.get('productPrice').touched">
-                          {{messages.productPrice.required}}
-                       </div> -->
+
                     </div>
-      
+
                     <div class="form-group">
                       <input type="number" formControlName="productQuantity" class="form-control" name="" id="" placeholder="Product Quantity">
-                       <!-- <div class="text-danger"*ngIf="this.productForm.get('productQuantity').errors.required&& this.productForm.get('productQuantity').touched">
-                          {{messages.productQuantity.required}}
-                       </div> -->
+
                     </div>
                 </div>
-                
+
               <button type="submit" class="btn btn-success mt-4 mb-4 bt-lg"[disabled]="productForm.invalid">Edit Product</button>
-             
+
               </div>
-       
+
           </form>
-      
+
       </div>
 
 </div>

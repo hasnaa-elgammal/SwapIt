@@ -30,14 +30,8 @@
             <div class="alert alert-danger" *ngIf="this.userForm.get('email').errors?.required && this.userForm.get('email').touched">Email is required</div>
             <div class="alert alert-danger" *ngIf="this.userForm.get('email').errors?.email && this.userForm.get('email').touched">Invalid Email</div>
             <div class="alert alert-danger" *ngIf="this.existsmessage !='' && this.existsmessage !=null && this.userForm.get('email').value !== null && this.userForm.get('email').value !== '' && isEmailExists()">{{this.existsmessage}}</div>
-        </div> 
-        <!-- <div class="col-md-12">
-            <label for="phone" class="form-label">Phone Number <span class="required-asterisk">*</span></label>
-            <input name="email" formControlName="phone" type="number" class="form-control" placeholder="Enter Your phone Number" required>
-            <div class="alert alert-danger" *ngIf="this.userForm.get('phone').errors?.required && this.userForm.get('phone').touched">Phone is required</div>
-            <div class="alert alert-danger" *ngIf="this.userForm.get('phone').errors?.email && this.userForm.get('phone').touched">Invalid phone</div>
-            <div class="alert alert-danger" *ngIf="this.existsmessage !='' && this.existsmessage !=null && this.userForm.get('phone').value !== null && this.userForm.get('phone').value !== ''">{{this.existsmessage}}</div>
-        </div>  -->
+        </div>
+
         <div class="col-md-6">
             <label for="inputPassword4" class="form-label">Password <span class="required-asterisk">*</span></label>
             <input name="password" formControlName="password" type="password" class="form-control" placeholder="Enter Your password" required minlength="6" >
@@ -59,7 +53,7 @@
             <div class="alert alert-danger" *ngIf="!this.userForm.get('country').valid && this.userForm.get('country').touched">Country is required</div>
        </div>
 
-        <div class="col-md-4"> 
+        <div class="col-md-4">
             <label for="inputCity" class="form-label">City</label>
             <input type="text" formControlName="city" class="form-control" id="inputCity" placeholder="Enter Your City">
         </div>
@@ -69,10 +63,6 @@
             <input type="text" formControlName="zipCode" class="form-control" id="inputZip" placeholder="Zip Code">
         </div>
         <div class="form-check mb-3">
-          <!-- <label class="form-check-label">
-            <input type="checkbox"formControlName="emailConfirmed" class="form-check-input ml-2" name="emailConfirmed" id="emailConfirmed" value="checkedValue" >
-            <label class="ml-4">Email Activated</label>
-          </label> -->
         </div>
 
         <div class= "col-12 text-center mt-5">
